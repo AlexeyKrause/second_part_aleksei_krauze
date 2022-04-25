@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE configuration
-        PUBLIC "-//mybatis.org//DTD buscompany.Config 3.0//EN"
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-config.dtd">
 
 <configuration>
@@ -25,11 +25,10 @@
     </environments>
 
     <mappers>
-        <mapper class="net.thumbtack.school.database.mybatis.mappers.TraineeMapper"/>
-        <mapper class="net.thumbtack.school.database.mybatis.mappers.GroupMapper"/>
-        <mapper class="net.thumbtack.school.database.mybatis.mappers.SchoolMapper"/>
-        <mapper class="net.thumbtack.school.database.mybatis.mappers.SubjectMapper"/>
-        <mapper resource="net/thumbtack/school/database/mybatis/mappers/SchoolMapper.xml"/>
+        <mapper class="com.akrauze.buscompany.mapper.UserMapper"/>
+<!--        <mapper class="net.thumbtack.school.database.mybatis.mappers.GroupMapper"/>-->
+<!--        <mapper resource="net/thumbtack/school/database/mybatis/mappers/SchoolMapper.xml"/>-->
     </mappers>
 
 </configuration>
+
