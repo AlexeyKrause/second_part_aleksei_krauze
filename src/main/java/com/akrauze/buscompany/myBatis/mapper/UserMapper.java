@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 @Mapper
 public interface UserMapper {
 
-    @Select("SELECT id, name FROM users WHERE id = #{id}")
+    @Select("SELECT * FROM users WHERE id = #{id}")
     User getById(int id);
 
 

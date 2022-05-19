@@ -3,10 +3,7 @@ package com.akrauze.buscompany.controllers;
 import com.akrauze.buscompany.daoImpl.UserDao;
 import com.akrauze.buscompany.model.User;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
@@ -19,6 +16,10 @@ public class UserController {
         this.userDao = userDao;
     }
 
+    @GetMapping(value = "/{id}",produces =  MediaType.APPLICATION_JSON_VALUE)
+    public User getUserById(@PathVariable("id") int id) {
+        return userDao.getUser(id);
+    }
 
     @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
     public User postUser(@Valid @RequestBody User user) {
