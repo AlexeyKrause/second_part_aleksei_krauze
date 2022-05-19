@@ -1,5 +1,5 @@
 import com.akrauze.buscompany.MyBatisUtils;
-import com.akrauze.buscompany.daoImpl.TestTest;
+import com.akrauze.buscompany.daoImpl.UserDao;
 import com.akrauze.buscompany.model.User;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -9,7 +9,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class TestUser {
 
-    TestTest testTest = new TestTest();
+    UserDao userDa = new UserDao();
     private static boolean setUpIsDone = false;
 
     @BeforeAll()
@@ -25,9 +25,9 @@ public class TestUser {
 
     @Test
     public void testInsertSelectUser() {
-        User user = testTest.insert(new User("Alex"));
+        User user = userDa.insert(new User("Alex", "Smith", "", "Alex1", "root"));
 
-        User userFromDb = testTest.getUser(user.getId());
+        User userFromDb = userDa.getUser(user.getId());
         assertEquals(user, userFromDb);
     }
 

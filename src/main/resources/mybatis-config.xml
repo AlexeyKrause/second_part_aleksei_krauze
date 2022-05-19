@@ -25,7 +25,7 @@
     </environments>
 
     <mappers>
-        <mapper class="com.akrauze.buscompany.mapper.UserMapper"/>
+        <mapper class="com.akrauze.buscompany.myBatis.mapper.UserMapper"/>
 <!--        <mapper class="net.thumbtack.school.database.mybatis.mappers.GroupMapper"/>-->
 <!--        <mapper resource="net/thumbtack/school/database/mybatis/mappers/SchoolMapper.xml"/>-->
     </mappers>
