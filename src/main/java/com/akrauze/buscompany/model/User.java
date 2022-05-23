@@ -4,6 +4,7 @@ package com.akrauze.buscompany.model;
 import lombok.*;
 
 import javax.validation.constraints.NotNull;
+import java.util.Set;
 
 @Data
 @NoArgsConstructor
@@ -19,6 +20,9 @@ public class User {
     String login;
     @NotNull
     String password;
+    Set<Role> roles;
+    boolean isActiv;
+
 
 
     public User(String firstName, String lastName, String patronymic, String login, String password) {
