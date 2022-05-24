@@ -2,10 +2,14 @@ package com.akrauze.buscompany.model;
 
 
 import lombok.*;
+import org.springframework.data.annotation.Id;
 
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.Set;
 
+@Entity
+@Table(name = "users")
 @Data
 @NoArgsConstructor
 public class User {

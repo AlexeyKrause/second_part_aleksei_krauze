@@ -1,9 +1,11 @@
-package com.akrauze.buscompany.config;
+package com.akrauze.buscompany.model;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
+
+
 
 public class MyUserDetail implements UserDetails {
 
