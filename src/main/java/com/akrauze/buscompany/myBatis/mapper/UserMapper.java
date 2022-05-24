@@ -11,8 +11,16 @@ public interface UserMapper {
     User getById(int id);
 
 
-    @Insert("INSERT INTO users (firstName, lastName, patronymic, login, password) VALUES "
-            + "( #{user.firstName}, #{user.lastName}, #{user.patronymic}, #{user.login}, #{user.password})")
+    @Select("SELECT id, firstname, lastname, patronymic, login, password, role, isActiv" +
+            " FROM users WHERE login = #{login}")
+//@Select("SELECT *" +
+//        " FROM users WHERE login = #{login}")
+    User getByLogin(String login);
+
+
+    @Insert("INSERT INTO users (firstName, lastName, patronymic, login, password, role) VALUES "
+            + "(#{user.firstName}, #{user.lastName}, #{user.patronymic}, #{user.login}," +
+            " #{user.password}, #{user.role})")
     @Options(useGeneratedKeys = true, keyProperty = "user.id")
     Integer insert(@Param("user")User user);
 }

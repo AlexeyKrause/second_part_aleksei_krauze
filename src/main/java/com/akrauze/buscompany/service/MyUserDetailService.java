@@ -19,7 +19,7 @@ public class MyUserDetailService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String login) throws UsernameNotFoundException {
-//        Optional<User> user = userDao.
-        return new MyUserDetail(login);
+        User user = userDao.getByLogin(login);
+        return new MyUserDetail(user);
     }
 }

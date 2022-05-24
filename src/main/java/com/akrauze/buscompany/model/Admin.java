@@ -1,6 +1,7 @@
 package com.akrauze.buscompany.model;
 
 
+import com.akrauze.buscompany.model.enums.Roles;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -9,8 +10,9 @@ import lombok.NoArgsConstructor;
 public class Admin extends User {
     String position;
 
-    public Admin(String firstName, String lastName, String patronymic, String login, String password, String position) {
-        super(firstName, lastName, patronymic, login, password);
+    public Admin(int id, String firstName, String lastName, String patronymic, String login,
+                 String password, Roles role, boolean isActiv, String position) {
+        super(id, firstName, lastName, patronymic, login, password, role, isActiv);
         this.position = position;
     }
 }

@@ -1,15 +1,11 @@
 package com.akrauze.buscompany.model;
 
 
+import com.akrauze.buscompany.model.enums.Roles;
 import lombok.*;
-import org.springframework.data.annotation.Id;
-
-import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import java.util.Set;
 
-@Entity
-@Table(name = "users")
+
 @Data
 @NoArgsConstructor
 public class User {
@@ -24,16 +20,20 @@ public class User {
     String login;
     @NotNull
     String password;
-    Set<Role> roles;
-    boolean isActiv;
+    @NotNull
+    Roles role;
+    Boolean isActiv;
+//    Boolean sessionActiv;
 
-
-
-    public User(String firstName, String lastName, String patronymic, String login, String password) {
+    public User(int id, String firstName, String lastName, String patronymic,
+                String login, String password, Roles role, boolean isActiv) {
+        this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.patronymic = patronymic;
         this.login = login;
         this.password = password;
+        this.role = role;
+        this.isActiv = isActiv;
     }
 }
