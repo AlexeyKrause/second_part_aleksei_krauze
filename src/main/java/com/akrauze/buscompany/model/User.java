@@ -21,12 +21,12 @@ public class User {
     @NotNull
     String password;
     @NotNull
-    Roles role;
+    String role;
     Boolean isActiv;
 //    Boolean sessionActiv;
 
     public User(int id, String firstName, String lastName, String patronymic,
-                String login, String password, Roles role, boolean isActiv) {
+                String login, String password, String role, boolean isActiv) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;

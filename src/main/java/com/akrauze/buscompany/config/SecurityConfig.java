@@ -1,17 +1,21 @@
 package com.akrauze.buscompany.config;
 
-import com.akrauze.buscompany.service.MyUserDetailService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+@Configuration
+@EnableAutoConfiguration
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
@@ -27,12 +31,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests()
+        http.csrf().disable()
+                .authorizeRequests()
                 .antMatchers("/api/users").hasRole("ADMIN")
                 .antMatchers("/user").hasAnyRole("ADMIN", "CLIENT")
-                .and().httpBasic();
+                .and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+//                .antMatchers("/api/users").permitAll()
+                .and().httpBasic()
+                .and().authorizeRequests();
 
-        http.csrf().disable();
 
         http.logout(logout ->
                 logout
@@ -42,14 +49,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         );
     }
 
-//    @Bean
-//    @Override
-//    protected UserDetailsService userDetailsService() {
-//        return myUserDetailService;
-//    }
+    @Bean
+    @Override
+    protected UserDetailsService userDetailsService() {
+        return userDetailsService;
+    }
 
     @Bean
-    protected PasswordEncoder passwordEncoder() {
+    protected PasswordEncoder encoder() {
 //        return new BCryptPasswordEncoder(13);
         return NoOpPasswordEncoder.getInstance();
     }
