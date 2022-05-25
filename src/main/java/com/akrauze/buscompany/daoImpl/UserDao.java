@@ -6,9 +6,6 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import javax.swing.text.html.Option;
-import java.util.Optional;
-
 @Slf4j
 @Repository
 public class UserDao extends DaoImplBase {
@@ -20,15 +17,14 @@ public class UserDao extends DaoImplBase {
         this.sqlSession = sqlSession;
     }
 
-    public User getUser(int id) {
+    public User getUserById(int id) {
         log.info("Dao getUserById " + id);
         return getUserMapper(sqlSession).getById(id);
     }
 
-    public User getByLogin(String login) {
-        User user = getUserMapper(sqlSession).getByLogin(login);
-        log.info("Dao getUserByLogin " + login + "User - " + user);
-        return user;
+    public User getUserByLogin(String login) {
+        log.info("Dao getUserByLogin " + login);
+        return getUserMapper(sqlSession).getByLogin(login);
     }
 
     public User insert(User user) {

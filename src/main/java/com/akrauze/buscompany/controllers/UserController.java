@@ -18,11 +18,11 @@ public class UserController {
 
     @GetMapping(value = "/{id}",produces =  MediaType.APPLICATION_JSON_VALUE)
     public User getUserById(@PathVariable("id") int id) {
-        return userDao.getUser(id);
+        return userDao.getUserById(id);
     }
 
     @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public User postUser(@Valid @RequestBody User user) {
+    public User insertUser(@Valid @RequestBody User user) {
         return userDao.insert(user);
     }
 }
