@@ -3,7 +3,12 @@ package com.akrauze.buscompany.model;
 
 import com.akrauze.buscompany.model.enums.Roles;
 import lombok.*;
+import org.springframework.beans.factory.annotation.Value;
+
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 
 
 @Data
@@ -19,6 +24,8 @@ public class User {
     @NotNull
     String login;
     @NotNull
+    @Pattern(regexp = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,}$")
+//    @Size(@Value("${min_password_length}"))
     String password;
     @NotNull
     String role;

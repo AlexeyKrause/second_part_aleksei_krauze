@@ -8,6 +8,8 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 public class Admin extends User {
+    int id;
+    User user;
     String position;
 
     public Admin(int id, String firstName, String lastName, String patronymic, String login,

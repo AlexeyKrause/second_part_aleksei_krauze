@@ -19,7 +19,7 @@ public class UserController {
 
     @GetMapping(value = "users/{id}",produces =  MediaType.APPLICATION_JSON_VALUE)
     public User getUserById(@PathVariable("id") int id) {
-        return userDao.getUser(id);
+        return userDao.getUserById(id);
     }
 
     @PostMapping(value = "/users",produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)

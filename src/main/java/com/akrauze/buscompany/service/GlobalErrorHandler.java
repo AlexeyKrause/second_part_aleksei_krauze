@@ -16,9 +16,9 @@ import java.util.List;
 @ControllerAdvice
 public class GlobalErrorHandler {
     @ExceptionHandler({MethodArgumentNotValidException.class})
-    @ResponseStatus(HttpStatus.UNAUTHORIZED)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ResponseBody
-    public MyError handleValidation1(MethodArgumentNotValidException exc) {
+    public MyError handleValidationMethodArgumentNotValidException(MethodArgumentNotValidException exc) {
         final MyError error = new MyError();
         exc.getBindingResult().getFieldErrors().forEach(fieldError-> {
             error.getAllErrors().add(String.format("Field %s:%s", fieldError.getField(), fieldError.getDefaultMessage()));
@@ -33,7 +33,19 @@ public class GlobalErrorHandler {
     @ExceptionHandler({MyException.class})
     @ResponseStatus(HttpStatus.NOT_FOUND)
     @ResponseBody
-    public MyError handleValidation2(MyException exc) {
+    public MyError handleValidationMyException(MyException exc) {
+        final MyError error = new MyError();
+
+        String str = exc.getMessage();
+        error.getAllErrors().add(exc.getCause().toString());
+        log.info("MyException {errors} - " + error);
+        return error;
+    }
+
+    @ExceptionHandler({Exception.class})
+//    @ResponseStatus(HttpStatus.NOT_FOUND)
+    @ResponseBody
+    public MyError handleValidationException(Exception exc) {
         final MyError error = new MyError();
 
         String str = exc.getMessage();
