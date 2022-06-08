@@ -8,6 +8,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 @EnableWebSecurity
@@ -21,22 +22,27 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 //        auth.userDetailsService(myUserDetailsService);
 //    }
 
+
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
                 .antMatchers("/api/client/**").hasAnyRole("CLIENT", "ADMIN")
                 .antMatchers("/api/users/**").hasRole("ADMIN")
+                .antMatchers("/api/admins/**").hasRole("ADMIN")
                 .antMatchers("/api/home/**").permitAll()
                 .and()
-                .httpBasic()
-//                .formLogin()
+//                .httpBasic()
+                .formLogin()
+                .successHandler(new MyAuthenticationSuccessHandler())
+
         ;
 
         http.csrf().disable();
 
         http.logout()
-                .logoutUrl("/api/users/l")
+                .logoutUrl("/api/l")
                 .invalidateHttpSession(true)
                 .deleteCookies("JSESSIONID");
     }
@@ -51,7 +57,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Bean
     protected PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
-//        return NoOpPasswordEncoder.getInstance();
+//        return new BCryptPasswordEncoder();
+        return NoOpPasswordEncoder.getInstance();
     }
 }

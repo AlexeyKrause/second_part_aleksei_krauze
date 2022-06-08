@@ -13,8 +13,6 @@ public interface UserMapper {
 
     @Select("SELECT id, firstname, lastname, patronymic, login, password, role, isActiv" +
             " FROM users WHERE login = #{login}")
-//@Select("SELECT *" +
-//        " FROM users WHERE login = #{login}")
     User getByLogin(String login);
 
 
@@ -23,4 +21,12 @@ public interface UserMapper {
             " #{user.password}, #{user.role})")
     @Options(useGeneratedKeys = true, keyProperty = "user.id")
     Integer insert(@Param("user")User user);
+
+
+    @Update("UPDATE ...")
+    User updateUser();
+
+
+    @Delete("DELETE ...")
+    User deleteUser();
 }

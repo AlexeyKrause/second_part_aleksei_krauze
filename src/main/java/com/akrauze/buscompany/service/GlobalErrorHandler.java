@@ -1,6 +1,7 @@
 package com.akrauze.buscompany.service;
 
 import com.akrauze.buscompany.exception.MyException;
+import lombok.ToString;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -49,11 +50,12 @@ public class GlobalErrorHandler {
         final MyError error = new MyError();
 
         String str = exc.getMessage();
-        error.getAllErrors().add(exc.getCause().toString());
+        error.getAllErrors().add(exc.getMessage().toString());
         log.info("MyException {errors} - " + error);
         return error;
     }
 
+    @ToString
     public static class MyError {
         private List<String> allErrors = new ArrayList<>();
 

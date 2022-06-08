@@ -19,11 +19,13 @@ CREATE TABLE users (
 	PRIMARY KEY (id)
 ) ENGINE=INNODB DEFAULT CHARSET=utf8;
 
-insert into users (firstName, lastname, login, password, role) values ("Alex", "Peres", "admin", "$2a$12$xedkG5qwTgCjVj7qdOcph.DrbYuXJ3XF6S51gueRSbw8i/JCTDogy", "ROLE_ADMIN");
-insert into users (firstName, lastname, login, password, role) values ("Fill", "Kollins", "client", "$2a$12$xedkG5qwTgCjVj7qdOcph.DrbYuXJ3XF6S51gueRSbw8i/JCTDogy", "ROLE_CLIENT");
-
 CREATE TABLE admins (
     id INT NOT NULL AUTO_INCREMENT,
+    position VARCHAR(50) NOT NULL,
     userId INT NOT NULL,
-	PRIMARY KEY (id)
+	PRIMARY KEY (id),
+    FOREIGN KEY (userId) REFERENCES users (id) ON DELETE CASCADE
 ) ENGINE=INNODB DEFAULT CHARSET=utf8;
+
+insert into users (firstName, lastname, login, password, role) values ("Alex", "Peres", "admin", "$2a$12$xedkG5qwTgCjVj7qdOcph.DrbYuXJ3XF6S51gueRSbw8i/JCTDogy", "ROLE_ADMIN");
+insert into users (firstName, lastname, login, password, role) values ("Fill", "Kollins", "client", "$2a$12$xedkG5qwTgCjVj7qdOcph.DrbYuXJ3XF6S51gueRSbw8i/JCTDogy", "ROLE_CLIENT");
