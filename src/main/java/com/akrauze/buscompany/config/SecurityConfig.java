@@ -33,13 +33,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/api/admins/**").hasRole("ADMIN")
                 .antMatchers("/api/home/**").permitAll()
                 .and()
-//                .httpBasic()
-                .formLogin()
-                .successHandler(new MyAuthenticationSuccessHandler())
-
+                .httpBasic()
+//                .formLogin()
+//                .successHandler(myAuthenticationSuccessHandler)
         ;
 
         http.csrf().disable();
+
 
         http.logout()
                 .logoutUrl("/api/l")

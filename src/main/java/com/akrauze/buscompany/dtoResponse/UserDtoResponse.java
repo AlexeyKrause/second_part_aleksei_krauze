@@ -1,11 +1,9 @@
-package com.akrauze.buscompany.model;
+package com.akrauze.buscompany.dtoResponse;
 
-
-import lombok.*;
-
+import lombok.Data;
 
 @Data
-public class User {
+public class UserDtoResponse {
     int id;
     String firstName;
     String lastName;
