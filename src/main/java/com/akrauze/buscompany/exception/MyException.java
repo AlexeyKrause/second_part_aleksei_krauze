@@ -1,6 +1,7 @@
 package com.akrauze.buscompany.exception;
 
 
+// REVU дайте другое имя. ServerException, например
 public class MyException extends Exception{
     private ErrorCode errorCode;
 

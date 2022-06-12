@@ -11,6 +11,8 @@ import javax.validation.constraints.Pattern;
 @NoArgsConstructor
 public class UserDtoRequest {
     @Setter(AccessLevel.NONE)
+    // REVU никакого id при создании на входе нет и быть не может
+            // id будет дан в процессе создания
     int id;
     @NotNull
     String firstName;
@@ -27,5 +29,7 @@ public class UserDtoRequest {
     String password;
     @NotNull
     String role;
+    // REVU не нужно. Сделайте таблицу сессий, и в ней будут user_id и его cookie
+    // А здесь это не нужно
     Boolean isActiv;
 }

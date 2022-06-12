@@ -7,7 +7,9 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.util.Arrays;
 import java.util.Collection;
 
-
+// REVU зачем ? Не нужен этот класс, в нем же то же самое, что в User
+// GrantedAuthority тоже тут не нужен, можно все самому сделать
+// Сделайте таблицу сессий, и в ней будут user_id и его cookie
 public class MyUserDetail implements UserDetails {
 
     private String firstName;
