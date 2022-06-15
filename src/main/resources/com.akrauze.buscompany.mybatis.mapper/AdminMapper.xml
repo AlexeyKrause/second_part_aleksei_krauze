@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="net.akrauze.buscompany.mybatis.mappers.AdminMapper">
+
+<!--    <resultMap id="resultAdmin" type="net.akrauze.buscompany.model.Admin">-->
+<!--        <id property="id" column="id" />-->
+<!--        <result property="firstName" column="users.firstName" />-->
+<!--        <result property="lastName" column="users.lastName" />-->
+<!--        <result property="patronymic" column="users.patronymic" />-->
+<!--        <result property="login" column="users.login" />-->
+<!--        <result property="password" column="users.password" />-->
+<!--        <result property="role" column="users.userRole"/>-->
+<!--        <result property="isActive" column="users.isActive"/>-->
+<!--        <result property="position" column="admins.position"/>-->
+<!--    </resultMap>-->
+
+<!--    <select id="getById" resultType="Admin">-->
+<!--        SELECT-->
+<!--        admins.id, users.firstName, users.lastName, users.patronymic, users.login, users.password,-->
+<!--        users.userRole, users.isActive, admins.position-->
+<!--        FROM admins, users-->
+<!--        WHERE admins.id = #{id} AND users.id = admin.userId;-->
+<!--    </select>-->
+
+</mapper>

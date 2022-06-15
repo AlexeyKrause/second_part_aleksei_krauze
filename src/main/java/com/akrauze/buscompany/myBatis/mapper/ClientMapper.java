@@ -1,24 +1,23 @@
 package com.akrauze.buscompany.myBatis.mapper;
 
-
-import com.akrauze.buscompany.model.Admin;
+import com.akrauze.buscompany.model.Client;
 import com.akrauze.buscompany.model.User;
 import org.apache.ibatis.annotations.*;
 
-
 @Mapper
-public interface AdminMapper {
-    @Insert("INSERT INTO admins (position, userId) VALUES "
-            + "(#{admin.position}, #{user.id})")
-    @Options(useGeneratedKeys = true, keyProperty = "admin.id")
-    Integer insert(@Param("admin") Admin admin, @Param("user") User user);
+public interface ClientMapper {
+
+    @Insert("INSERT INTO clients (email, telefonNumber, userId) VALUES "
+            + "(#{client.email}, #{client.telefonNumber}, #{user.id})")
+    @Options(useGeneratedKeys = true, keyProperty = "client.id")
+    Integer insert(@Param("client") Client client, @Param("user") User user);
 
 
-    @Select("SELECT admins.id AS id, admins.position AS position, admins.userId AS userId, users.firstName AS firstName, " +
+    @Select("SELECT clients.id AS id, clients.email AS email, clients.telefonNumber AS telefonNumber,clients.userId AS userId, users.firstName AS firstName, " +
             "users.lastname AS lastName, users.patronymic AS patronymic, users.login AS login, users.password AS password, " +
             "users.userRole AS userRole " +
-            "FROM admins, users " +
-            "WHERE admins.id = #{id} AND users.id=admins.userId")
+            "FROM clients, users " +
+            "WHERE clients.id = #{id} AND users.id = userId")
     @Results({
             @Result(property = "id", column = "id"),
             @Result(property = "firstName", column = "firstName"),
@@ -27,15 +26,16 @@ public interface AdminMapper {
             @Result(property = "login", column = "login"),
             @Result(property = "password", column = "password"),
             @Result(property = "userRole", column = "userRole"),
-            @Result(property = "position", column = "position")
+            @Result(property = "email", column = "email"),
+            @Result(property = "telefonNumber", column = "telefonNumber"),
     })
-    Admin getById(int id);
+    Client getById(int id);
 
 
     @Update("UPDATE ...")
-    Admin update();
+    Client update();
 
 
     @Delete("DELETE ...")
-    Admin delete();
+    Client delete();
 }

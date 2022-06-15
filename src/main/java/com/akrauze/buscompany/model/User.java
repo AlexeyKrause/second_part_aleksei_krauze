@@ -1,10 +1,12 @@
 package com.akrauze.buscompany.model;
 
 
+import com.akrauze.buscompany.model.enums.UserRole;
 import lombok.*;
 
 
 @Data
+@ToString
 public class User {
     int id;
     String firstName;
@@ -12,6 +14,5 @@ public class User {
     String patronymic;
     String login;
     String password;
-    String role;
-    Boolean isActiv;
+    UserRole userRole;
 }

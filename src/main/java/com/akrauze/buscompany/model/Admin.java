@@ -5,9 +5,7 @@ import lombok.*;
 
 @Data
 @ToString
-public class Admin {
-    @Setter(AccessLevel.NONE)
-    int id;
-    User user;
-    String position;
+public class Admin extends User{
+       int id;
+       String position;
 }

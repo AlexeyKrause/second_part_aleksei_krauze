@@ -1,41 +1,50 @@
-package com.akrauze.buscompany.daoImpl;
+package com.akrauze.buscompany.daoimpl;
 
-import com.akrauze.buscompany.exception.ErrorCode;
-import com.akrauze.buscompany.exception.MyException;
+import com.akrauze.buscompany.dao.UserDao;
+import com.akrauze.buscompany.exception.ServerException;
 import com.akrauze.buscompany.model.User;
-import com.fasterxml.jackson.datatype.jdk8.OptionalDoubleSerializer;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Repository;
-
-import java.util.Optional;
 
 @Slf4j
 @Repository
-public class UserDao extends DaoImplBase {
+public class UserDaoImpl extends DaoImplBase implements UserDao {
 
     @Autowired
     SqlSession sqlSession;
 
-    public UserDao(SqlSession sqlSession) {
+    public UserDaoImpl(SqlSession sqlSession) {
         this.sqlSession = sqlSession;
     }
 
-    public User getUserById(int id) {
+    @Override
+    public User getById(int id) {
         log.info("Dao getUserById " + id);
         return getUserMapper(sqlSession).getById(id);
     }
 
-    public User getUserByLogin(String login) throws MyException {
+    @Override
+    public User getUserByLogin(String login) {
         log.info("Dao getUserByLogin " + login);
         return getUserMapper(sqlSession).getByLogin(login);
     }
 
+    @Override
     public User insert(User user) {
         log.info("DAO insert User {}", user);
         getUserMapper(sqlSession).insert(user);
         return user;
+    }
+
+    @Override
+    public User update(User user) {
+        return null;
+    }
+
+    @Override
+    public void delete(int id) {
+
     }
 }

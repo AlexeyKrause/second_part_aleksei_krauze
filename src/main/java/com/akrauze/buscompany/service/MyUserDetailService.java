@@ -1,9 +1,8 @@
 package com.akrauze.buscompany.service;
 
-import com.akrauze.buscompany.daoImpl.UserDao;
+import com.akrauze.buscompany.dao.UserDao;
 import com.akrauze.buscompany.exception.ErrorCode;
-import com.akrauze.buscompany.exception.MyException;
-import com.akrauze.buscompany.model.MyUserDetail;
+import com.akrauze.buscompany.exception.ServerException;
 import com.akrauze.buscompany.model.User;
 import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,8 +21,13 @@ public class MyUserDetailService implements UserDetailsService {
     @SneakyThrows
     @Override
     public UserDetails loadUserByUsername(String login) {
-        User user = Optional.ofNullable(userDao.getUserByLogin(login)).orElseThrow(
-                () -> new MyException(ErrorCode.THE_USER_NOT_FOUND));
-        return new MyUserDetail(user);
+        User myUser = Optional.ofNullable(userDao.getUserByLogin(login)).orElseThrow(
+                () -> new ServerException(ErrorCode.THE_USER_NOT_FOUND));
+        UserDetails user = org.springframework.security.core.userdetails.User.builder()
+                .username(myUser.getLogin())
+                .password(myUser.getPassword())
+                .roles(myUser.getUserRole().toString())
+                .build();
+        return user;
     }
 }

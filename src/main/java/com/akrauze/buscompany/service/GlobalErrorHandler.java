@@ -1,6 +1,6 @@
 package com.akrauze.buscompany.service;
 
-import com.akrauze.buscompany.exception.MyException;
+import com.akrauze.buscompany.exception.ServerException;
 import lombok.ToString;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -31,10 +31,10 @@ public class GlobalErrorHandler {
         return error;
     }
 
-    @ExceptionHandler({MyException.class})
+    @ExceptionHandler({ServerException.class})
     @ResponseStatus(HttpStatus.NOT_FOUND)
     @ResponseBody
-    public MyError handleValidationMyException(MyException exc) {
+    public MyError handleValidationServerException(ServerException exc) {
         final MyError error = new MyError();
 
         String str = exc.getMessage();
@@ -50,7 +50,7 @@ public class GlobalErrorHandler {
         final MyError error = new MyError();
 
         String str = exc.getMessage();
-        error.getAllErrors().add(exc.getMessage().toString());
+        error.getAllErrors().add(str);
         log.info("MyException {errors} - " + error);
         return error;
     }

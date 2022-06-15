@@ -1,6 +1,6 @@
 package com.akrauze.buscompany.model.enums;
 
-public enum Roles {
+public enum UserRole {
     ADMIN,
     CLIENT
 }

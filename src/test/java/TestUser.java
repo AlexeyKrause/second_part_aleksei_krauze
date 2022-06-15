@@ -1,14 +1,11 @@
 
 import com.akrauze.buscompany.controllers.UserController;
-import com.akrauze.buscompany.daoImpl.UserDao;
-import com.akrauze.buscompany.model.User;
+import com.akrauze.buscompany.daoimpl.UserDaoImpl;
 import org.apache.ibatis.session.SqlSession;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -20,7 +17,7 @@ public class TestUser {
     @Autowired
     SqlSession sqlSession;
     @Autowired
-    UserDao userDao;
+    UserDaoImpl userDao;
 
 //    @BeforeAll()
 //    public static void setUp() {

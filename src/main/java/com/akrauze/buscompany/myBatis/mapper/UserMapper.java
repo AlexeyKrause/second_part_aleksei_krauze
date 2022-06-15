@@ -11,22 +11,22 @@ public interface UserMapper {
     User getById(int id);
 
 
-    @Select("SELECT id, firstname, lastname, patronymic, login, password, role, isActiv" +
+    @Select("SELECT id, firstname, lastname, patronymic, login, password, userRole" +
             " FROM users WHERE login = #{login}")
     User getByLogin(String login);
 
 
-    @Insert("INSERT INTO users (firstName, lastName, patronymic, login, password, role) VALUES "
+    @Insert("INSERT INTO users (firstName, lastName, patronymic, login, password, userRole) VALUES "
             + "(#{user.firstName}, #{user.lastName}, #{user.patronymic}, #{user.login}," +
-            " #{user.password}, #{user.role})")
+            " #{user.password}, #{user.userRole})")
     @Options(useGeneratedKeys = true, keyProperty = "user.id")
-    Integer insert(@Param("user")User user);
+    Integer     insert(@Param("user")User user);
 
 
     @Update("UPDATE ...")
-    User updateUser();
+    User update();
 
 
     @Delete("DELETE ...")
-    User deleteUser();
+    User delete();
 }

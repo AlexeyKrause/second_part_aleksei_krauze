@@ -1,12 +1,11 @@
 package com.akrauze.buscompany.exception;
 
 
-public class MyException extends Exception{
+public class ServerException extends Exception{
     private ErrorCode errorCode;
 
 
-
-    public MyException(ErrorCode message) {
+    public ServerException(ErrorCode message) {
         super(message.toString());
     }
 

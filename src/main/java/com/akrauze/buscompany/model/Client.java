@@ -7,7 +7,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class Client extends User {
     int id;
-    User user;
     String email;
     int telefonNumber;
 }

@@ -1,4 +1,4 @@
-package com.akrauze.buscompany.dtoResponse;
+package com.akrauze.buscompany.dtoresponse;
 
 import lombok.Data;
 
@@ -8,8 +8,4 @@ public class UserDtoResponse {
     String firstName;
     String lastName;
     String patronymic;
-    String login;
-    String password;
-    String role;
-    Boolean isActiv;
 }
