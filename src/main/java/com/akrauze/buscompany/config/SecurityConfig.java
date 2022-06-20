@@ -32,8 +32,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/api/admins/**").hasRole("ADMIN")
                 .antMatchers(("/api/clients")).hasRole("CLIENT")
                 .and()
-                .httpBasic()
-//                .formLogin()
+//                .httpBasic()
+                .formLogin()
 //                .successHandler(myAuthenticationSuccessHandler)
         ;
 

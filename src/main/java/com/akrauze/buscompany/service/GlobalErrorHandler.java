@@ -38,13 +38,13 @@ public class GlobalErrorHandler {
         final MyError error = new MyError();
 
         String str = exc.getMessage();
-        error.getAllErrors().add(exc.getCause().toString());
+        error.getAllErrors().add(str);
         log.info("MyException {errors} - " + error);
         return error;
     }
 
     @ExceptionHandler({Exception.class})
-//    @ResponseStatus(HttpStatus.NOT_FOUND)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
     @ResponseBody
     public MyError handleValidationException(Exception exc) {
         final MyError error = new MyError();
