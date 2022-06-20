@@ -7,6 +7,7 @@ import lombok.*;
 
 @Data
 @ToString
+// REVU abstract ?
 public class User {
     int id;
     String firstName;

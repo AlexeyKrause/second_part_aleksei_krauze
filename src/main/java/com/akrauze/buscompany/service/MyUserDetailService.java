@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import java.util.Optional;
 
 @Service
+// REVU "My" нигде не надо.
 public class MyUserDetailService implements UserDetailsService {
 
     @Autowired
@@ -20,6 +21,7 @@ public class MyUserDetailService implements UserDetailsService {
 
     @SneakyThrows
     @Override
+    // REVU а он нужен ? Где он вызывается ?
     public UserDetails loadUserByUsername(String login) {
         User myUser = Optional.ofNullable(userDao.getUserByLogin(login)).orElseThrow(
                 () -> new ServerException(ErrorCode.THE_USER_NOT_FOUND));

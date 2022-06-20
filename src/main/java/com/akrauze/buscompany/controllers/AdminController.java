@@ -39,6 +39,7 @@ public class AdminController {
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public AdminDtoResponse postAdmin(@Valid @RequestBody AdminDtoRequest adminDtoRequest) {
+        // REVU все это в сервис. А здесь только вызов метода сервиса
         User user = userDao.insert(userMapper.dtoToModel(userMapper.adminDtoToUserDto(adminDtoRequest)));
         Admin admin = adminMapper.dtoToModel(adminDtoRequest);
         sessionDao.insert(new Session(user.getId()));

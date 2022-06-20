@@ -40,6 +40,7 @@ public class ClientController {
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     ClientDtoResponse postClient(@Valid @RequestBody ClientDtoRequest clientDtoRequest) {
+        // REVU все это в сервис. А здесь только вызов метода сервиса
         User user = userDao.insert(userMapper.clientDtoToUserDto(clientDtoRequest));
         Client client = clientMapper.dtoToModel(clientDtoRequest);
         sessionDao.insert(new Session(user.getId()));
