@@ -1,15 +1,21 @@
 package com.akrauze.buscompany.dao;
 
-import com.akrauze.buscompany.model.User;
+import com.akrauze.buscompany.model.Admin;
+import com.akrauze.buscompany.model.Client;
 
 public interface UserDao {
-    User insert(User user);
+    void insertFromAdmin(Admin admin);
 
-    User getById(int id);
+    void insertFromClient(Client client);
 
-    User getUserByLogin(String login);
 
-    User update(User user);
+    Integer getIdByLogin(String login);
+
+    String getPassByLogin(String login);
+
+    String getUserRoleByLogin(String login);
+
+
 
     void delete(int id);
 }

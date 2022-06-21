@@ -2,7 +2,6 @@ package com.akrauze.buscompany.daoimpl;
 
 import com.akrauze.buscompany.dao.ClientDao;
 import com.akrauze.buscompany.model.Client;
-import com.akrauze.buscompany.model.User;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,9 +26,9 @@ public class ClientDaoImpl extends DaoImplBase implements ClientDao {
     }
 
     @Override
-    public Client insert(Client client, User user) {
+    public Client insert(Client client, int userId) {
         log.info("DAO insert Client {}", client);
-        getClientMapper(sqlSession).insert(client, user);
+        getClientMapper(sqlSession).insert(client, userId);
         return client;
     }
 

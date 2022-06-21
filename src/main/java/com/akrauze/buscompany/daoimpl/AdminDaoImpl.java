@@ -3,7 +3,6 @@ package com.akrauze.buscompany.daoimpl;
 
 import com.akrauze.buscompany.dao.AdminDao;
 import com.akrauze.buscompany.model.Admin;
-import com.akrauze.buscompany.model.User;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,14 +26,10 @@ public class AdminDaoImpl extends DaoImplBase implements AdminDao {
         return admin;
     }
 
-//    public Admin getAdminByLogin(String login) throws ServerException {
-//        log.info("Dao getAdminByLogin " + login);
-//        return getAdminMapper(sqlSession).getByLogin(login);
-//    }
     @Override
-    public Admin insert(Admin admin, User user) {
+    public Admin insert(Admin admin, int userId) {
         log.info("DAO insert Admin {}", admin);
-    getAdminMapper(sqlSession).insert(admin, user);
+        getAdminMapper(sqlSession).insert(admin, userId);
         return admin;
     }
 

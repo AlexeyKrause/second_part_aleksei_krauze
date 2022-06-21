@@ -3,7 +3,6 @@ package com.akrauze.buscompany.mappers;
 import com.akrauze.buscompany.dtorequest.AdminDtoRequest;
 import com.akrauze.buscompany.dtoresponse.AdminDtoResponse;
 import com.akrauze.buscompany.model.Admin;
-import com.akrauze.buscompany.model.User;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.factory.Mappers;

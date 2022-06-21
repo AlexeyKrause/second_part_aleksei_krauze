@@ -2,16 +2,15 @@ package com.akrauze.buscompany.myBatis.mapper;
 
 
 import com.akrauze.buscompany.model.Admin;
-import com.akrauze.buscompany.model.User;
 import org.apache.ibatis.annotations.*;
 
 
 @Mapper
 public interface AdminMapper {
     @Insert("INSERT INTO admins (position, userId) VALUES "
-            + "(#{admin.position}, #{user.id})")
+            + "(#{admin.position}, #{userId})")
     @Options(useGeneratedKeys = true, keyProperty = "admin.id")
-    Integer insert(@Param("admin") Admin admin, @Param("user") User user);
+    Integer insert(@Param("admin") Admin admin, @Param("userId") int userId);
 
 
     @Select("SELECT admins.id AS id, admins.position AS position, admins.userId AS userId, users.firstName AS firstName, " +

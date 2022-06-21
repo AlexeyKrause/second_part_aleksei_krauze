@@ -1,11 +1,10 @@
 package com.akrauze.buscompany.dao;
 
 import com.akrauze.buscompany.model.Admin;
-import com.akrauze.buscompany.model.User;
 
 public interface AdminDao {
 
-    Admin insert(Admin admin, User user);
+    Admin insert(Admin admin, int userId);
 
     Admin getById(int id);
 

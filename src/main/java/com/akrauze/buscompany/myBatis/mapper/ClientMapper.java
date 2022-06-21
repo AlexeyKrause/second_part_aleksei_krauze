@@ -1,16 +1,15 @@
 package com.akrauze.buscompany.myBatis.mapper;
 
 import com.akrauze.buscompany.model.Client;
-import com.akrauze.buscompany.model.User;
 import org.apache.ibatis.annotations.*;
 
 @Mapper
 public interface ClientMapper {
 
     @Insert("INSERT INTO clients (email, telefonNumber, userId) VALUES "
-            + "(#{client.email}, #{client.telefonNumber}, #{user.id})")
+            + "(#{client.email}, #{client.telefonNumber}, #{userId})")
     @Options(useGeneratedKeys = true, keyProperty = "client.id")
-    Integer insert(@Param("client") Client client, @Param("user") User user);
+    Integer insert(@Param("client") Client client, @Param("userId") int userId);
 
 
     @Select("SELECT clients.id AS id, clients.email AS email, clients.telefonNumber AS telefonNumber,clients.userId AS userId, users.firstName AS firstName, " +
