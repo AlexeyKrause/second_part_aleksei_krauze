@@ -18,7 +18,7 @@ public interface SessionMapper {
 
     @Update("UPDATE sessions SET isActive = #{session.isActive}, javaSessionId = #{session.javaSessionId} " +
             "WHERE userId = #{session.userId}")
-    Session updateSession(@Param("session") Session session);
+    void updateSession(@Param("session") Session session);
 
 //    @Update("")
 //    Session updateIsActive

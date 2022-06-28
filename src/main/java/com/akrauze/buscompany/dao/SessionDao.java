@@ -7,5 +7,5 @@ public interface SessionDao {
 
     Session getByUserId(int id);
 
-    Session updateSession(Session session);
+    void updateSession(Session session);
 }

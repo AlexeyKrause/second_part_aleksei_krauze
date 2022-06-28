@@ -17,9 +17,8 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.Arrays;
-import java.util.Optional;
-import java.util.UUID;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 @Transactional
@@ -58,6 +57,7 @@ public class SessionService {
     }
 
     public String logout(HttpServletRequest httpServletRequest) {
-        return Arrays.toString(httpServletRequest.getCookies());
+        List<Cookie> cookies = Arrays.stream(httpServletRequest.getCookies()).filter(p -> p.getName().equals("JAVASESSIONID")).collect(Collectors.toList());
+        return cookies.get(0).getName() + " : " + cookies.get(0).getValue();
     }
 }

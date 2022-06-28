@@ -8,15 +8,12 @@ import com.akrauze.buscompany.dtoresponse.ClientDtoResponse;
 import com.akrauze.buscompany.mappers.ClientMapper;
 import com.akrauze.buscompany.model.Client;
 import com.akrauze.buscompany.model.Session;
-import org.apache.ibatis.session.SqlSession;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.UUID;
 
 @Service
-@Transactional
 public class ClientService {
     private final UserDaoImpl userDao;
     private final ClientDaoImpl clientDao;
@@ -36,6 +33,7 @@ public class ClientService {
         return clientMapper.modelToDtoResponse(clientDao.getById(id));
     }
 
+    @Transactional
     public ClientDtoResponse potClient(ClientDtoRequest clientDtoRequest) {
         Client client = clientMapper.dtoToModel(clientDtoRequest);
         userDao.insertFromClient(client);

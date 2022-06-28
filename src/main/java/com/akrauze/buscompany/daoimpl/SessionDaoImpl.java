@@ -26,9 +26,9 @@ public class SessionDaoImpl extends DaoImplBase implements SessionDao {
     }
 
     @Override
-    public Session updateSession(Session session) {
+    public void updateSession(Session session) {
         log.info("SessionDao update Session");
-        return getSessionMapper(sqlSession).updateSession(session);
+        getSessionMapper(sqlSession).updateSession(session);
     }
 }
 
