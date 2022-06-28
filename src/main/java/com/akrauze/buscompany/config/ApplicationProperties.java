@@ -12,7 +12,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 @AllArgsConstructor
 @ConfigurationProperties
 public class ApplicationProperties {
-    int maxNameLength;
-    int minPasswordLength;
+    int max_name_length;
+    int min_password_length;
     int user_idle_timeout;
 }

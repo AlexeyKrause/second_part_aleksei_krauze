@@ -2,6 +2,7 @@ package com.akrauze.buscompany.daoimpl;
 
 
 import com.akrauze.buscompany.dao.AdminDao;
+import com.akrauze.buscompany.dao.Dao;
 import com.akrauze.buscompany.model.Admin;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.ibatis.session.SqlSession;
@@ -12,7 +13,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class AdminDaoImpl extends DaoImplBase implements AdminDao {
     @Autowired
-    SqlSession sqlSession;
+    private final SqlSession sqlSession;
 
     public AdminDaoImpl(SqlSession sqlSession) {
         this.sqlSession = sqlSession;
@@ -24,6 +25,12 @@ public class AdminDaoImpl extends DaoImplBase implements AdminDao {
         Admin admin = getAdminMapper(sqlSession).getById(id);
         log.info("Dao getAdminById - " + admin);
         return admin;
+    }
+
+    @Override
+    public Admin getByLogin(String login) {
+        log.info("Dao getAdminByLogin - " + login);
+        return getAdminMapper(sqlSession).getByILogin(login);
     }
 
     @Override
@@ -40,6 +47,12 @@ public class AdminDaoImpl extends DaoImplBase implements AdminDao {
 
     @Override
     public void delete(int id) {
+    }
+
+    @Override
+    public void deleteAll() {
 
     }
+
+
 }

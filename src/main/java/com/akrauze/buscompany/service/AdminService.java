@@ -9,8 +9,12 @@ import com.akrauze.buscompany.mappers.AdminMapper;
 import com.akrauze.buscompany.model.Admin;
 import com.akrauze.buscompany.model.Session;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.UUID;
 
 @Service
+@Transactional
 public class AdminService {
     private final AdminDaoImpl adminDao;
     private final UserDaoImpl userDao;
@@ -33,7 +37,7 @@ public class AdminService {
         Admin admin = adminMapper.dtoToModel(adminDtoRequest);
         userDao.insertFromAdmin(admin);
         int userId = userDao.getIdByLogin(admin.getLogin());
-        sessionDao.insert(new Session(userId));
+        sessionDao.insert(new Session(userId, UUID.randomUUID().toString()));
         return adminMapper.modelToDtoResponse(adminDao.insert(admin, userId));
     }
 }

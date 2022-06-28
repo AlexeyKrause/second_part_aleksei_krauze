@@ -8,7 +8,6 @@ public interface UserDao {
 
     void insertFromClient(Client client);
 
-
     Integer getIdByLogin(String login);
 
     String getPassByLogin(String login);

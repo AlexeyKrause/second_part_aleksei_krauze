@@ -1,19 +1,18 @@
 package com.akrauze.buscompany.exception;
 
+import lombok.Data;
 
+@Data
 public class ServerException extends Exception{
-    private ErrorCode errorCode;
+    private String errorCode;
+    private String field;
+    private String message;
 
 
-    public ServerException(ErrorCode message) {
-        super(message.toString());
-    }
-
-    public ErrorCode getErrorCode() {
-        return errorCode;
-    }
-
-    public void setErrorCode(ErrorCode errorCode) {
-        this.errorCode = errorCode;
+    public ServerException(String errorCode, String field, String message) {
+        super();
+        this.errorCode= errorCode;
+        this.field = field;
+        this.message = message;
     }
 }

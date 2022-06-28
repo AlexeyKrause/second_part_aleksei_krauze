@@ -43,6 +43,7 @@ CREATE TABLE sessions (
 	id INT NOT NULL AUTO_INCREMENT,
     isActive boolean DEFAULT true,
     userId INT NOT NULL,
+    javaSessionId VARCHAR(255),
     PRIMARY KEY (id),
     FOREIGN KEY (userId) REFERENCES users(id) ON DELETE CASCADE
 ) ENGINE=INNODB DEFAULT CHARSET=utf8;

@@ -8,6 +8,8 @@ public interface ClientDao {
 
     Client getById(int id);
 
+    Client getByLogin(String login);
+
     Client update(Client client);
 
     void delete(int id);

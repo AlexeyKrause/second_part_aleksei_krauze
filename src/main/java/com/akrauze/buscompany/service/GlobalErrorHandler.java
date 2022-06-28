@@ -32,19 +32,20 @@ public class GlobalErrorHandler {
     }
 
     @ExceptionHandler({ServerException.class})
-    @ResponseStatus(HttpStatus.NOT_FOUND)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ResponseBody
     public MyError handleValidationServerException(ServerException exc) {
         final MyError error = new MyError();
 
-        String str = exc.getMessage();
-        error.getAllErrors().add(str);
+        error.getAllErrors().add(String.format("ErrorCode\":\"%s", exc.getErrorCode()));
+        error.getAllErrors().add(String.format("Field\":\"%s", exc.getField()));
+        error.getAllErrors().add(String.format("Message\":\"%s", exc.getMessage()));
         log.info("MyException {errors} - " + error);
         return error;
     }
 
     @ExceptionHandler({Exception.class})
-    @ResponseStatus(HttpStatus.NOT_FOUND)
+//    @ResponseStatus(HttpStatus.NOT_FOUND)
     @ResponseBody
     public MyError handleValidationException(Exception exc) {
         final MyError error = new MyError();

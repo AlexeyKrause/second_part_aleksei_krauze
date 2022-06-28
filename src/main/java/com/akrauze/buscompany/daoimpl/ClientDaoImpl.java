@@ -26,6 +26,12 @@ public class ClientDaoImpl extends DaoImplBase implements ClientDao {
     }
 
     @Override
+    public Client getByLogin(String login) {
+        log.info("Dao getClientByLogin - " + login);
+        return getClientMapper(sqlSession).getByLogin(login);
+    }
+
+    @Override
     public Client insert(Client client, int userId) {
         log.info("DAO insert Client {}", client);
         getClientMapper(sqlSession).insert(client, userId);

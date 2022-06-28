@@ -31,10 +31,32 @@ public interface ClientMapper {
     Client getById(int id);
 
 
+    @Select("SELECT clients.id AS id, clients.email AS email, clients.telefonNumber AS telefonNumber,clients.userId AS userId, users.firstName AS firstName, " +
+            "users.lastname AS lastName, users.patronymic AS patronymic, users.login AS login, users.password AS password, " +
+            "users.userRole AS userRole " +
+            "FROM clients, users " +
+            "WHERE users.login = #{login}")
+    @Results({
+            @Result(property = "id", column = "id"),
+            @Result(property = "firstName", column = "firstName"),
+            @Result(property = "lastName", column = "lastName"),
+            @Result(property = "patronymic", column = "patronymic"),
+            @Result(property = "login", column = "login"),
+            @Result(property = "password", column = "password"),
+            @Result(property = "userRole", column = "userRole"),
+            @Result(property = "email", column = "email"),
+            @Result(property = "telefonNumber", column = "telefonNumber"),
+    })
+    Client getByLogin(String login);
+
+
     @Update("UPDATE ...")
     Client update();
 
 
     @Delete("DELETE ...")
     Client delete();
+
+    @Delete(("DELETE "))
+    void deleteAll();
 }

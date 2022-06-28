@@ -8,7 +8,11 @@ public interface AdminDao {
 
     Admin getById(int id);
 
+    Admin getByLogin(String login);
+
     Admin update(Admin admin);
 
     void delete(int id);
+
+    void deleteAll();
 }
