@@ -11,7 +11,6 @@ import com.akrauze.buscompany.model.Session;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.UUID;
 
 @Service
 @Transactional
@@ -37,7 +36,7 @@ public class AdminService {
         Admin admin = adminMapper.dtoToModel(adminDtoRequest);
         userDao.insertFromAdmin(admin);
         int userId = userDao.getIdByLogin(admin.getLogin());
-        sessionDao.insert(new Session(userId, UUID.randomUUID().toString()));
+        sessionDao.insert(new Session(userId));
         return adminMapper.modelToDtoResponse(adminDao.insert(admin, userId));
     }
 }

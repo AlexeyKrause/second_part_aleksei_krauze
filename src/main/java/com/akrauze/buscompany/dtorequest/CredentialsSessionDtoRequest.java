@@ -9,7 +9,7 @@ import javax.validation.constraints.NotNull;
 @Data
 @ToString
 @AllArgsConstructor
-public class SessionDtoRequest {
+public class CredentialsSessionDtoRequest {
     @NotNull
     String login;
     @NotNull

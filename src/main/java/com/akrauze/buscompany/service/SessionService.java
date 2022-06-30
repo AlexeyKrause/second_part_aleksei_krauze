@@ -4,9 +4,8 @@ import com.akrauze.buscompany.daoimpl.AdminDaoImpl;
 import com.akrauze.buscompany.daoimpl.ClientDaoImpl;
 import com.akrauze.buscompany.daoimpl.SessionDaoImpl;
 import com.akrauze.buscompany.daoimpl.UserDaoImpl;
-import com.akrauze.buscompany.dtorequest.SessionDtoRequest;
+import com.akrauze.buscompany.dtorequest.CredentialsSessionDtoRequest;
 import com.akrauze.buscompany.dtoresponse.UserDtoResponse;
-import com.akrauze.buscompany.exception.ErrorCode;
 import com.akrauze.buscompany.exception.ServerException;
 import com.akrauze.buscompany.mappers.AdminMapper;
 import com.akrauze.buscompany.mappers.ClientMapper;
@@ -18,7 +17,6 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.*;
-import java.util.stream.Collectors;
 
 @Service
 @Transactional
@@ -29,35 +27,34 @@ public class SessionService {
     private final ClientDaoImpl clientDao;
     private final AdminMapper adminMapper;
     private final ClientMapper clientMapper;
+    private final ValidateService validateService;
 
     public SessionService(UserDaoImpl userDao, SessionDaoImpl sessionDao, ClientDaoImpl clientDao, AdminMapper adminMapper,
-                          AdminDaoImpl adminDao, ClientMapper clientMapper) {
+                          AdminDaoImpl adminDao, ClientMapper clientMapper, ValidateService validateService) {
         this.userDao = userDao;
         this.sessionDao = sessionDao;
         this.clientDao = clientDao;
         this.adminMapper = adminMapper;
         this.adminDao = adminDao;
         this.clientMapper = clientMapper;
+        this.validateService = validateService;
     }
 
-    public UserDtoResponse login(SessionDtoRequest sessionDtoRequest, HttpServletResponse httpServletResponse) throws ServerException {
-        String login = sessionDtoRequest.getLogin();
-        Optional.ofNullable(userDao.getIdByLogin(login)).orElseThrow(
-                () -> new ServerException(ErrorCode.THE_USER_NOT_FOUND.toString(), "login", "Данный логин не существует"));
-        Optional.ofNullable(userDao.getPassByLogin(login)).orElseThrow(
-                () -> new ServerException(ErrorCode.PASSWORD_NOT_CORRECT.toString(), "password", "Не верный пароль"));
+    public UserDtoResponse login(CredentialsSessionDtoRequest credentials, HttpServletResponse httpServletResponse) throws ServerException {
+        validateService.checkLoginCredential(credentials);
+        String login = credentials.getLogin();
         /* добавление статуса активности и новой куки JAVASESSIONID----------------------------------------------------------------------------*/
         String javaSessionId = UUID.randomUUID().toString();
         sessionDao.updateSession(new Session(userDao.getIdByLogin(login), true, javaSessionId));
         httpServletResponse.addCookie(new Cookie("JAVASESSIONID", javaSessionId));
         if (userDao.getUserRoleByLogin(login).equals("CLIENT")) {
-            return clientMapper.modelToDtoResponse(clientDao.getByLogin(sessionDtoRequest.getLogin()));
-        } else
-            return adminMapper.modelToDtoResponse(adminDao.getByLogin(sessionDtoRequest.getLogin()));
+            return clientMapper.modelToDtoResponse(clientDao.getByLogin(login));
+        } else if(userDao.getUserRoleByLogin(login).equals("ADMIN"))
+            return adminMapper.modelToDtoResponse(adminDao.getByLogin(login));
+        else return null;//на случай если будут еще роли
     }
 
-    public String logout(HttpServletRequest httpServletRequest) {
-        List<Cookie> cookies = Arrays.stream(httpServletRequest.getCookies()).filter(p -> p.getName().equals("JAVASESSIONID")).collect(Collectors.toList());
-        return cookies.get(0).getName() + " : " + cookies.get(0).getValue();
+    public void logout(HttpServletRequest httpServletRequest) {
+
     }
 }

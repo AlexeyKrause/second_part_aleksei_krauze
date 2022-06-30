@@ -44,6 +44,12 @@ public class UserDaoImpl extends DaoImplBase implements UserDao {
     }
 
     @Override
+    public int getCountLogin(String login) {
+        log.info("UserDao getCountLogin");
+        return getUserMapper(sqlSession).getCountLogin(login);
+    }
+
+    @Override
     public void insertFromAdmin(Admin admin) {
         log.info("DAO insert User from Admin {admin} - " + admin);
         getUserMapper(sqlSession).insertFromAdmin(admin);

@@ -8,5 +8,6 @@ import lombok.NoArgsConstructor;
 public class Client extends User {
     int id;
     String email;
-    int telefonNumber;
+    int phoneNumber;
+
 }

@@ -26,6 +26,9 @@ public interface UserMapper {
             "FROM users WHERE login = #{login}")
     String getUserRoleByLogin(String login);
 
+    @Select("SELECT COUNT(*) FROM users WHERE login = #{login}")
+    int getCountLogin(String login);
+
 
     @Insert("INSERT INTO users (firstName, lastName, patronymic, login, password, userRole) VALUES "
             + "(#{admin.firstName}, #{admin.lastName}, #{admin.patronymic}, #{admin.login}," +

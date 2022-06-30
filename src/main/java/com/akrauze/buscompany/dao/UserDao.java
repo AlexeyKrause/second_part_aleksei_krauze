@@ -14,7 +14,7 @@ public interface UserDao {
 
     String getUserRoleByLogin(String login);
 
-
+    int getCountLogin(String login);
 
     void delete(int id);
 }

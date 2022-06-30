@@ -26,6 +26,11 @@ public class Session {
         setJavaSessionId(javaSessionId);
     }
 
+    public Session(int userId, boolean isActive) {
+        setUserId(userId);
+        setActive(isActive);
+    }
+
     public Session(int userId, boolean isActive, String javaSessionId) {
         setUserId(userId);
         setActive(isActive);

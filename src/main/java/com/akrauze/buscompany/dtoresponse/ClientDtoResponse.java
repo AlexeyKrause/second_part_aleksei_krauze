@@ -8,7 +8,6 @@ import lombok.ToString;
 public class ClientDtoResponse extends UserDtoResponse{
     int id;
     String email;
-    // REVU phoneNumber
-    int telefonNumber;
+    int phoneNumber;
     String userType;
 }

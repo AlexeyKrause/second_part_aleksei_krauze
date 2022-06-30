@@ -41,7 +41,7 @@ CREATE TABLE clients (
 
 CREATE TABLE sessions (
 	id INT NOT NULL AUTO_INCREMENT,
-    isActive boolean DEFAULT true,
+    isActive boolean DEFAULT false,
     userId INT NOT NULL,
     javaSessionId VARCHAR(255),
     PRIMARY KEY (id),

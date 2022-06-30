@@ -12,5 +12,5 @@ public class ClientDtoRequest extends UserDtoRequest{
     @NotNull
     String email;
     @NotNull
-    int telefonNumber;
+    int phoneNumber;
 }

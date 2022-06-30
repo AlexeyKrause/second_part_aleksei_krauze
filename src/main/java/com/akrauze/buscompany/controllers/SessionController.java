@@ -1,6 +1,6 @@
 package com.akrauze.buscompany.controllers;
 
-import com.akrauze.buscompany.dtorequest.SessionDtoRequest;
+import com.akrauze.buscompany.dtorequest.CredentialsSessionDtoRequest;
 import com.akrauze.buscompany.dtoresponse.UserDtoResponse;
 import com.akrauze.buscompany.exception.ServerException;
 import com.akrauze.buscompany.service.SessionService;
@@ -21,14 +21,13 @@ public class SessionController {
     }
 
     @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public UserDtoResponse postLogin(@Valid @RequestBody SessionDtoRequest sessionDtoRequest,
+    public UserDtoResponse postLogin(@Valid @RequestBody CredentialsSessionDtoRequest sessionDtoRequest,
                                      HttpServletResponse httpServletResponse) throws ServerException {
         return sessionService.login(sessionDtoRequest, httpServletResponse);
     }
 
     @DeleteMapping(produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.ALL_VALUE)
-    public String logout(HttpServletRequest httpServletRequest) {
-
-        return sessionService.logout(httpServletRequest);
+    public void logout(HttpServletRequest httpServletRequest) {
+        sessionService.logout(httpServletRequest);
     }
 }
