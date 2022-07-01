@@ -17,6 +17,7 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 @Transactional
@@ -54,7 +55,16 @@ public class SessionService {
         else return null;//на случай если будут еще роли
     }
 
-    public void logout(HttpServletRequest httpServletRequest) {
+    public void logout(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) {
+        Session session = getJavaSessionId(httpServletRequest, httpServletResponse);
+        session.setActive(false);
+        session.setJavaSessionId(null);
+        sessionDao.updateSession(session);
+    }
 
+    public Session getJavaSessionId(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) {
+        List<Cookie> cookies = Arrays.stream(httpServletRequest.getCookies()).filter(p -> p.getName().equals("JAVASESSIONID") ).collect(Collectors.toList());
+        httpServletResponse.addCookie(new Cookie("JAVASESSIONID", ""));
+        return sessionDao.getByJavaSessionId(cookies.get(0).getValue());
     }
 }

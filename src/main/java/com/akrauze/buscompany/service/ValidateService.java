@@ -33,8 +33,8 @@ public class ValidateService {
     }
 
     public void checkNewLogin(String login) throws ServerException {
-        if (userDao.getCountLogin(login)>=1) {
-            throw new ServerException(ErrorCode.LOGIN_ALREADY_EXIST.toString(), "login", "Данный логин уже существует");
+        if (userDao.getCountLogin(login) >= 1) {
+            throw new ServerException(ErrorCode.LOGIN_ALREADY_EXIST.toString(), "login", "Данный логин уже существует, выберете другой логин");
         }
     }
 }

@@ -7,5 +7,7 @@ public interface SessionDao {
 
     Session getByUserId(int id);
 
+    Session getByJavaSessionId(String javaSessionId);
+
     void updateSession(Session session);
 }

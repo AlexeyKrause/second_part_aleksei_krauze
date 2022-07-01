@@ -13,6 +13,9 @@ public interface SessionMapper {
     @Select("SELECT * FROM sessions WHERE userId=#{userId}")
     Session getByUserId(int userId);
 
+    @Select("SELECT * FROM sessions WHERE javaSessionId = #{javaSessionId}")
+    Session getByJavaSessionId(String javaSessionId);
+
     @Delete("DELETE ")
     void delete();
 

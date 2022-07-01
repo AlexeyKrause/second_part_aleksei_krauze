@@ -15,14 +15,20 @@ public class SessionDaoImpl extends DaoImplBase implements SessionDao {
 
     @Override
     public Session insert(Session session) {
-        log.info("DAO insert session - " + session);
+        log.info("SessionDao insert session - " + session);
         getSessionMapper(sqlSession).insert(session);
         return session;
     }
 
     public Session getByUserId(int id) {
-        log.info("DAO get Session by Id -" + id);
+        log.info("SessionDao get Session by Id -" + id);
         return getSessionMapper(sqlSession).getByUserId(id);
+    }
+
+    @Override
+    public Session getByJavaSessionId(String javaSessionId) {
+        log.info("SessionDao get Session by javaSessionId - " + javaSessionId);
+        return getSessionMapper(sqlSession).getByJavaSessionId(javaSessionId);
     }
 
     @Override
