@@ -50,21 +50,32 @@ public class SessionService {
         httpServletResponse.addCookie(new Cookie("JAVASESSIONID", javaSessionId));
         if (userDao.getUserRoleByLogin(login).equals("CLIENT")) {
             return clientMapper.modelToDtoResponse(clientDao.getByLogin(login));
-        } else if(userDao.getUserRoleByLogin(login).equals("ADMIN"))
+        } else
             return adminMapper.modelToDtoResponse(adminDao.getByLogin(login));
-        else return null;//на случай если будут еще роли
     }
 
-    public void logout(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) {
-        Session session = getJavaSessionId(httpServletRequest, httpServletResponse);
+    public String logout(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) {
+        Session session = getJavaSessionId(httpServletRequest);
+        session.setJavaSessionId(null);
+        sessionDao.updateSession(session);
+        httpServletResponse.addCookie(new Cookie("JAVASESSIONID", ""));
+        return "";
+    }
+
+    public String deleteAccount(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) {
+        Session session = getJavaSessionId(httpServletRequest);
         session.setActive(false);
         session.setJavaSessionId(null);
         sessionDao.updateSession(session);
+        httpServletResponse.addCookie(new Cookie("JAVASESSIONID", ""));
+        return "";
     }
 
-    public Session getJavaSessionId(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) {
-        List<Cookie> cookies = Arrays.stream(httpServletRequest.getCookies()).filter(p -> p.getName().equals("JAVASESSIONID") ).collect(Collectors.toList());
-        httpServletResponse.addCookie(new Cookie("JAVASESSIONID", ""));
+    public Session getJavaSessionId(HttpServletRequest httpServletRequest) {
+        List<Cookie> cookies = Arrays.stream(httpServletRequest.getCookies()).filter(p
+                -> p.getName().equals("JAVASESSIONID") ).collect(Collectors.toList());
         return sessionDao.getByJavaSessionId(cookies.get(0).getValue());
     }
+
+
 }

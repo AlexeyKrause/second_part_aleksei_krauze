@@ -28,8 +28,12 @@ public class AdminService {
         this.adminMapper = adminMapper;
     }
 
-    public AdminDtoResponse getAdminById(int id) {
+    public AdminDtoResponse getById(int id) {
         return adminMapper.modelToDtoResponse(adminDao.getById(id));
+    }
+
+    public AdminDtoResponse getByJavaSessionId(String javaSessionId) {
+        return adminMapper.modelToDtoResponse(adminDao.getByJavaSessionId(javaSessionId));
     }
 
     public AdminDtoResponse postAdmin(AdminDtoRequest adminDtoRequest) {

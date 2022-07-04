@@ -2,6 +2,9 @@ package com.akrauze.buscompany.myBatis.mapper;
 
 import com.akrauze.buscompany.model.Client;
 import org.apache.ibatis.annotations.*;
+import org.apache.ibatis.mapping.FetchType;
+
+import java.util.List;
 
 @Mapper
 public interface ClientMapper {
@@ -34,8 +37,7 @@ public interface ClientMapper {
     @Select("SELECT clients.id AS id, clients.email AS email, clients.phoneNumber AS phoneNumber,clients.userId AS userId, users.firstName AS firstName, " +
             "users.lastname AS lastName, users.patronymic AS patronymic, users.login AS login, users.password AS password, " +
             "users.userRole AS userRole " +
-            "FROM clients, users " +
-            "WHERE users.login = #{login}")
+            "FROM clients INNER JOIN users ON users.id=userId AND users.login=#{login}")
     @Results({
             @Result(property = "id", column = "id"),
             @Result(property = "firstName", column = "firstName"),
@@ -48,6 +50,43 @@ public interface ClientMapper {
             @Result(property = "phoneNumber", column = "phoneNumber"),
     })
     Client getByLogin(String login);
+
+
+    @Select("SELECT clients.id AS id, clients.email AS email, clients.phoneNumber AS phoneNumber,clients.userId AS userId, users.firstName AS firstName, " +
+            "users.lastname AS lastName, users.patronymic AS patronymic, users.login AS login, users.password AS password, " +
+            "users.userRole AS userRole " +
+            "FROM clients, users, sessions " +
+            "WHERE sessions.javaSessionId=#{javaSessionId} AND users.id = sessions.userId")
+    @Results({
+            @Result(property = "id", column = "id"),
+            @Result(property = "firstName", column = "firstName"),
+            @Result(property = "lastName", column = "lastName"),
+            @Result(property = "patronymic", column = "patronymic"),
+            @Result(property = "login", column = "login"),
+            @Result(property = "password", column = "password"),
+            @Result(property = "userRole", column = "userRole"),
+            @Result(property = "email", column = "email"),
+            @Result(property = "phoneNumber", column = "phoneNumber"),
+    })
+    Client getByJavaSessionId(String javaSessionId);
+
+
+    @Select("SELECT clients.id AS id, clients.email AS email, clients.phoneNumber AS phoneNumber,clients.userId AS userId, " +
+            "users.firstName AS firstName, users.lastname AS lastName, users.patronymic AS patronymic, users.login AS login, " +
+            "users.password AS password, users.userRole AS userRole " +
+            "FROM clients INNER JOIN users ON users.id = userId")
+    @Results(value = {
+                @Result(property = "id", column = "id"),
+                @Result(property = "firstName", column = "firstName"),
+                @Result(property = "lastName", column = "lastName"),
+                @Result(property = "patronymic", column = "patronymic"),
+                @Result(property = "login", column = "login"),
+                @Result(property = "password", column = "password"),
+                @Result(property = "userRole", column = "userRole"),
+                @Result(property = "email", column = "email"),
+                @Result(property = "phoneNumber", column = "phoneNumber"),
+    })
+    List<Client> getAll();
 
 
     @Update("UPDATE ...")

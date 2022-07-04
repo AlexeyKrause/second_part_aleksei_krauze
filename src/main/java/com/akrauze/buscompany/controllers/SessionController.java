@@ -27,7 +27,7 @@ public class SessionController {
     }
 
     @DeleteMapping(produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.ALL_VALUE)
-    public void logout(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) {
-        sessionService.logout(httpServletRequest, httpServletResponse);
+    public String logout(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) {
+        return sessionService.logout(httpServletRequest, httpServletResponse);
     }
 }

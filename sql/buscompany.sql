@@ -42,7 +42,7 @@ CREATE TABLE clients (
 CREATE TABLE sessions (
 	id INT NOT NULL AUTO_INCREMENT,
     isActive boolean DEFAULT false,
-    userId INT NOT NULL,
+    userId INT NOT NULL DEFAULT true,
     javaSessionId VARCHAR(255),
     PRIMARY KEY (id),
     FOREIGN KEY (userId) REFERENCES users(id) ON DELETE CASCADE

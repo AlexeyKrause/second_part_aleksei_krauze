@@ -7,6 +7,5 @@ public enum ErrorCode {
     PASSWORD_NOT_CORRECT,
     LOGIN_NOT_FOUND,
     LOGIN_ALREADY_EXIST,
-
-
+    YOU_ARE_NOT_PERMISSIONS
 }

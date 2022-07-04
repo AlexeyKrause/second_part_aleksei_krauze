@@ -10,6 +10,8 @@ public interface AdminDao {
 
     Admin getByLogin(String login);
 
+    Admin getByJavaSessionId(String javaSessionId);
+
     Admin update(Admin admin);
 
     void delete(int id);

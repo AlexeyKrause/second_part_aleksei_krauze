@@ -14,6 +14,8 @@ public interface UserDao {
 
     String getUserRoleByLogin(String login);
 
+    String getUserRoleByJavaSessionId(String javaSessionId);
+
     int getCountLogin(String login);
 
     void delete(int id);

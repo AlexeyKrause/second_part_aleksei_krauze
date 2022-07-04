@@ -27,20 +27,26 @@ public class UserDaoImpl extends DaoImplBase implements UserDao {
 
     @Override
     public Integer getIdByLogin(String login) {
-        log.info("Dao getUserByLogin " + login);
+        log.info("UserDao getUserByLogin " + login);
         return getUserMapper(sqlSession).getIdByLogin(login);
     }
 
     @Override
     public String getPassByLogin(String login) {
-        log.info("Dao getPasswordByLogin " + login);
+        log.info("UserDao getPasswordByLogin " + login);
         return getUserMapper(sqlSession).getPassByLogin(login);
     }
 
     @Override
     public String getUserRoleByLogin(String login) {
-        log.info("Dao getUserRoleByLogin " + login);
+        log.info("UserDao getUserRoleByLogin " + login);
         return getUserMapper(sqlSession).getUserRoleByLogin(login);
+    }
+
+    @Override
+    public String getUserRoleByJavaSessionId(String javaSessionId) {
+        log.info("UserDao getUserRoleByJavaSessionId {} - ", javaSessionId);
+        return getUserMapper(sqlSession).getUserRoleByJavaSessionId(javaSessionId);
     }
 
     @Override
@@ -51,13 +57,13 @@ public class UserDaoImpl extends DaoImplBase implements UserDao {
 
     @Override
     public void insertFromAdmin(Admin admin) {
-        log.info("DAO insert User from Admin {admin} - " + admin);
+        log.info("UserDao insert User from Admin {admin} - " + admin);
         getUserMapper(sqlSession).insertFromAdmin(admin);
     }
 
     @Override
     public void insertFromClient(Client client) {
-        log.info("DAO insert User from Client {client} - " + client);
+        log.info("UserDao insert User from Client {client} - " + client);
         getUserMapper(sqlSession).insertFromClient(client);
     }
 

@@ -29,7 +29,7 @@ public class AdminController {
 
     @GetMapping(value = "/{id}",produces = MediaType.APPLICATION_JSON_VALUE)
     public AdminDtoResponse getAdmin(@PathVariable("id") int id) {
-        return adminService.getAdminById(id);
+        return adminService.getById(id);
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)

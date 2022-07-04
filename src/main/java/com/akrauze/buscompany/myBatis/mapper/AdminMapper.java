@@ -49,6 +49,24 @@ public interface AdminMapper {
     Admin getByILogin(String login);
 
 
+    @Select("SELECT admins.id AS id, admins.position AS position, admins.userId AS userId, users.firstName AS firstName, " +
+            "users.lastname AS lastName, users.patronymic AS patronymic, users.login AS login, users.password AS password, " +
+            "users.userRole AS userRole " +
+            "FROM admins, users, sessions " +
+            "WHERE sessions.javaSessionId=#{javaSessionId} AND users.id = sessions.userId")
+    @Results({
+            @Result(property = "id", column = "id"),
+            @Result(property = "firstName", column = "firstName"),
+            @Result(property = "lastName", column = "lastName"),
+            @Result(property = "patronymic", column = "patronymic"),
+            @Result(property = "login", column = "login"),
+            @Result(property = "password", column = "password"),
+            @Result(property = "userRole", column = "userRole"),
+            @Result(property = "position", column = "position")
+    })
+    Admin getByJavaSessionId(String javaSessionId);
+
+
     @Update("UPDATE ...")
     Admin update();
 

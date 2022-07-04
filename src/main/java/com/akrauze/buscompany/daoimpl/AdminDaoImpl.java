@@ -23,19 +23,25 @@ public class AdminDaoImpl extends DaoImplBase implements AdminDao {
     public Admin getById(int id) {
         log.info("Dao getAdminById - " + id);
         Admin admin = getAdminMapper(sqlSession).getById(id);
-        log.info("Dao getAdminById - " + admin);
+        log.info("Dao getAdminById {} - ", admin);
         return admin;
     }
 
     @Override
     public Admin getByLogin(String login) {
-        log.info("Dao getAdminByLogin - " + login);
+        log.info("Dao getAdminByLogin {} - ", login);
         return getAdminMapper(sqlSession).getByILogin(login);
     }
 
     @Override
+    public Admin getByJavaSessionId(String javaSessionId) {
+        log.info("AdminDao getAdminByJavaSessionId {} - ", javaSessionId);
+        return getAdminMapper(sqlSession).getByJavaSessionId(javaSessionId);
+    }
+
+    @Override
     public Admin insert(Admin admin, int userId) {
-        log.info("DAO insert Admin {}", admin);
+        log.info("DAO insert Admin {} - ", admin);
         getAdminMapper(sqlSession).insert(admin, userId);
         return admin;
     }

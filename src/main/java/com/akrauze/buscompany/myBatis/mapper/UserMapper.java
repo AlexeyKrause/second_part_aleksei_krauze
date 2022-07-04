@@ -26,6 +26,11 @@ public interface UserMapper {
             "FROM users WHERE login = #{login}")
     String getUserRoleByLogin(String login);
 
+    @Select("SELECT users.userRole " +
+            "FROM users, sessions " +
+            "WHERE javaSessionId = #{javaSessionId} AND users.id=sessions.userId")
+    String getUserRoleByJavaSessionId(String javaSessionId);
+
     @Select("SELECT COUNT(*) FROM users WHERE login = #{login}")
     int getCountLogin(String login);
 

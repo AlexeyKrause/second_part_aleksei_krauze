@@ -5,39 +5,22 @@
 
 <mapper namespace="net.akrauze.buscompany.mybatis.mappers.ClientMapper">
 
-    <!--    <resultMap id="resultSchool" type="net.thumbtack.school.database.model.School">-->
-    <!--        <id property="id" column="school_id" />-->
-    <!--        <result property="name" column="schoolname" />-->
-    <!--        <result property="year" column="year" />-->
-    <!--        <collection property="groups" column="id" javaType="java.util.List"-->
-    <!--                    ofType="net.thumbtack.school.database.model.Group">-->
-    <!--            <result property="name" column="group_name" />-->
-    <!--            <result property="room" column="room" />-->
-    <!--            <result property="id" column="group_id" />-->
-    <!--            <collection property="trainees" column="id" javaType="java.util.List"-->
-    <!--                        ofType="net.thumbtack.school.database.model.Trainee">-->
-    <!--                <result property="firstName" column="firstname"/>-->
-    <!--                <result property="lastName" column="lastname"/>-->
-    <!--                <result property="rating" column="rating"/>-->
-    <!--                <result property="id" column="trainee_id"/>-->
-    <!--            </collection>-->
-    <!--            <collection property="subjects" column="id" javaType="java.util.List"-->
-    <!--                        ofType="net.thumbtack.school.database.model.Subject">-->
-    <!--                <result property="name" column="subject_name"/>-->
-    <!--                <result property="id" column="subject_id"/>-->
-    <!--            </collection>-->
-    <!--        </collection>-->
-    <!--    </resultMap>-->
+<!--        <resultMap id="resultClients" type="com.akrauze.buscompany.model.Client">-->
+<!--            <id property="id" column="id" />-->
+<!--            <result property="firstName" column="firstName" />-->
+<!--            <result property="lastName" column="lastName" />-->
+<!--            <result property="patronymic" column="patronymic" />-->
+<!--            <result property="login" column="login" />-->
+<!--            <result property="password" column="password" />-->
+<!--            <result property="email" column="email" />-->
+<!--            <result property="phoneNumber" column="phoneNumber" />-->
+<!--        </resultMap>-->
 
-    <!--    <select id="getAllUsingJoin" resultMap="resultSchool">-->
-    <!--        SELECT-->
-    <!--        school.id AS school_id,school.name AS schoolname, year, `group`.id AS group_id, `group`.name as group_name, `group`.room,-->
-    <!--        trainee.id AS trainee_id, firstname, lastname, rating, subject.id AS subject_id, subject.name as subject_name-->
-    <!--        FROM school-->
-    <!--        JOIN `group` ON schoolid = school.id-->
-    <!--        LEFT JOIN trainee ON groupid = `group`.id-->
-    <!--        JOIN subject WHERE subject.id IN (SELECT subjectid FROM subject_group WHERE groupid = `group`.id);-->
-
-    <!--    </select>-->
+<!--        <select id="getAllUsingJoin" resultMap="resultClients">-->
+<!--            SELECT clients.id AS id, clients.email AS email, clients.phoneNumber AS phoneNumber,clients.userId AS userId,-->
+<!--            users.firstName AS firstName, users.lastname AS lastName, users.patronymic AS patronymic, users.login AS login,-->
+<!--            users.password AS password, users.userRole AS userRole  " +-->
+<!--            "FROM clients, users"-->
+<!--        </select>-->
 
 </mapper>
