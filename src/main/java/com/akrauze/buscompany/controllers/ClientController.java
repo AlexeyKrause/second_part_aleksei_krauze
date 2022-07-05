@@ -27,7 +27,8 @@ public class ClientController {
     public final ValidateService validateService;
     private final UserService userService;
 
-    public ClientController(ClientService clientService, SessionService sessionService, ValidateService validateService, UserService userService) {
+    public ClientController(ClientService clientService, SessionService sessionService,
+                            ValidateService validateService, UserService userService) {
         this.clientService = clientService;
         this.sessionService = sessionService;
         this.validateService = validateService;
@@ -36,9 +37,10 @@ public class ClientController {
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     List<ClientDtoResponse> getAllClient(HttpServletRequest httpServletRequest) throws ServerException {
-        if (userService.getUserRoleByJavaSessionId(sessionService.getJavaSessionId(httpServletRequest).getJavaSessionId()).equals("ADMIN"))
+        if (userService.getUserRoleByJavaSessionId(sessionService.getJavaSessionId(httpServletRequest)
+                .getJavaSessionId()).equals("ADMIN"))
             return clientService.getAllClient();
-        else throw new ServerException(ErrorCode.YOU_ARE_NOT_PERMISSIONS.toString(), "userRole", "");
+        else throw new ServerException(ErrorCode.YOU_DONT_HAVE_PERMISSIONS, "userRole");
     }
 
     @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -47,9 +49,11 @@ public class ClientController {
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    UserDtoResponse postClient(@Valid @RequestBody ClientDtoRequest clientDtoRequest, HttpServletResponse httpServletResponse) throws ServerException {
+    UserDtoResponse postClient(@Valid @RequestBody ClientDtoRequest clientDtoRequest,
+                               HttpServletResponse httpServletResponse) throws ServerException {
         validateService.checkNewLogin(clientDtoRequest.getLogin());
         clientService.postClient(clientDtoRequest);
-        return sessionService.login(new CredentialsSessionDtoRequest(clientDtoRequest.getLogin(), clientDtoRequest.getPassword()), httpServletResponse);
+        return sessionService.login(new CredentialsSessionDtoRequest(clientDtoRequest.getLogin(),
+                clientDtoRequest.getPassword()), httpServletResponse);
     }
 }

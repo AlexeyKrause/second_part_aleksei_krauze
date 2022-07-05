@@ -21,15 +21,15 @@ public class ClientDaoImpl extends DaoImplBase implements ClientDao {
 
     @Override
     public Client getById(int id) {
-        log.info("Dao getClientById - " + id);
+        log.info("ClientDao getClientById {} - ", id);
         Client client = getClientMapper(sqlSession).getById(id);
-        log.info("Dao getClientById - " + client);
+        log.info("ClientDao getClientById - " + client);
         return client;
     }
 
     @Override
     public Client getByLogin(String login) {
-        log.info("Dao getClientByLogin - " + login);
+        log.info("ClientDao getClientByLogin {} - ", login);
         return getClientMapper(sqlSession).getByLogin(login);
     }
 
@@ -47,7 +47,7 @@ public class ClientDaoImpl extends DaoImplBase implements ClientDao {
 
     @Override
     public Client insert(Client client, int userId) {
-        log.info("DAO insert Client {}", client);
+        log.info("ClientDao insert Client {}", client);
         getClientMapper(sqlSession).insert(client, userId);
         return client;
     }

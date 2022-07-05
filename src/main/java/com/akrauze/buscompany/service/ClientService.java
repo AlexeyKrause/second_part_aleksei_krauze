@@ -34,7 +34,8 @@ public class ClientService {
     }
 
     public List<ClientDtoResponse> getAllClient() {
-        return clientDao.getAll().stream().map(clientMapper::modelToDtoResponse).collect(Collectors.toList());
+        return clientDao.getAll().stream()
+                .map(clientMapper::modelToDtoResponse).collect(Collectors.toList());
     }
 
     public ClientDtoResponse getClientById(int id) {

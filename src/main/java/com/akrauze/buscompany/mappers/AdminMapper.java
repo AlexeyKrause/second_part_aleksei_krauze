@@ -1,7 +1,9 @@
 package com.akrauze.buscompany.mappers;
 
-import com.akrauze.buscompany.dtorequest.AdminDtoRequest;
-import com.akrauze.buscompany.dtoresponse.AdminDtoResponse;
+import com.akrauze.buscompany.dtorequest.CreateAdminDtoRequest;
+import com.akrauze.buscompany.dtorequest.UpdateAdminDtoRequest;
+import com.akrauze.buscompany.dtoresponse.CreateAdminDtoResponse;
+import com.akrauze.buscompany.dtoresponse.UpdateAdminDtoResponse;
 import com.akrauze.buscompany.model.Admin;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -12,8 +14,28 @@ public interface AdminMapper {
 
     AdminMapper INSTANCE = Mappers.getMapper(AdminMapper.class);
 
-    Admin dtoToModel(AdminDtoRequest adminDtoRequest);
+
+    Admin dtoToModel(CreateAdminDtoRequest adminDtoRequest);
+
 
     @Mapping(target = "userType", constant = "admin")
-    AdminDtoResponse modelToDtoResponse(Admin admin);
+    CreateAdminDtoResponse modelToDtoResponse(Admin admin);
+
+
+    @Mapping(source = "adminDtoRequest.firstName", target = "firstName")
+    @Mapping(source = "adminDtoRequest.lastName", target = "lastName")
+    @Mapping(source = "adminDtoRequest.patronymic", target = "patronymic")
+    @Mapping(source = "admin.login", target = "login")
+    @Mapping(source = "adminDtoRequest.newPassword", target = "password")
+    @Mapping(source = "admin.userRole", target = "userRole")
+    @Mapping(source = "adminDtoRequest.position", target = "position")
+    Admin UpdateDtoRequestToModel(Admin admin, UpdateAdminDtoRequest adminDtoRequest);
+
+
+    @Mapping(source = "admin.firstName", target = "firstName")
+    @Mapping(source = "admin.lastName", target = "lastName")
+    @Mapping(source = "admin.patronymic", target = "patronymic")
+    @Mapping(source = "admin.position", target = "position")
+    @Mapping(target = "userType", constant = "admin")
+    UpdateAdminDtoResponse modelToUpdateDtoResponse(Admin admin);
 }

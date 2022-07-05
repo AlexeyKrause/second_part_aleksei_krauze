@@ -8,7 +8,7 @@ import javax.validation.constraints.NotNull;
 
 @Data
 @ToString
-public class ClientDtoRequest extends UserDtoRequest{
+public class ClientDtoRequest extends CreateUserDtoRequest {
     @NotNull
     String email;
     @NotNull

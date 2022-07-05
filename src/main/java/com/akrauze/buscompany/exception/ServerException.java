@@ -4,15 +4,13 @@ import lombok.Data;
 
 @Data
 public class ServerException extends Exception{
-    private String errorCode;
+    private ErrorCode errorCode;
     private String field;
-    private String message;
 
 
-    public ServerException(String errorCode, String field, String message) {
+    public ServerException(ErrorCode errorCode, String field) {
         super();
         this.errorCode= errorCode;
         this.field = field;
-        this.message = message;
     }
 }

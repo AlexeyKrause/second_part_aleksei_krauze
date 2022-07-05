@@ -3,13 +3,18 @@ package com.akrauze.buscompany.service;
 import com.akrauze.buscompany.daoimpl.AdminDaoImpl;
 import com.akrauze.buscompany.daoimpl.SessionDaoImpl;
 import com.akrauze.buscompany.daoimpl.UserDaoImpl;
-import com.akrauze.buscompany.dtorequest.AdminDtoRequest;
-import com.akrauze.buscompany.dtoresponse.AdminDtoResponse;
+import com.akrauze.buscompany.dtorequest.CreateAdminDtoRequest;
+import com.akrauze.buscompany.dtorequest.UpdateAdminDtoRequest;
+import com.akrauze.buscompany.dtoresponse.CreateAdminDtoResponse;
+import com.akrauze.buscompany.dtoresponse.UpdateAdminDtoResponse;
+import com.akrauze.buscompany.exception.ServerException;
 import com.akrauze.buscompany.mappers.AdminMapper;
 import com.akrauze.buscompany.model.Admin;
 import com.akrauze.buscompany.model.Session;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import javax.servlet.http.HttpServletRequest;
 
 
 @Service
@@ -19,28 +24,42 @@ public class AdminService {
     private final UserDaoImpl userDao;
     private final SessionDaoImpl sessionDao;
     private final AdminMapper adminMapper;
+    private final SessionService sessionService;
+    private final ValidateService validateService;
 
 
-    public AdminService(AdminDaoImpl adminDao, UserDaoImpl userDao, SessionDaoImpl sessionDao, AdminMapper adminMapper) {
+    public AdminService(AdminDaoImpl adminDao, UserDaoImpl userDao, SessionDaoImpl sessionDao, AdminMapper adminMapper,
+                        SessionService sessionService, ValidateService validateService) {
         this.adminDao = adminDao;
         this.userDao = userDao;
         this.sessionDao = sessionDao;
         this.adminMapper = adminMapper;
+        this.sessionService = sessionService;
+        this.validateService = validateService;
     }
 
-    public AdminDtoResponse getById(int id) {
+    public CreateAdminDtoResponse getById(int id) {
         return adminMapper.modelToDtoResponse(adminDao.getById(id));
     }
 
-    public AdminDtoResponse getByJavaSessionId(String javaSessionId) {
+    public CreateAdminDtoResponse getByJavaSessionId(String javaSessionId) {
         return adminMapper.modelToDtoResponse(adminDao.getByJavaSessionId(javaSessionId));
     }
 
-    public AdminDtoResponse postAdmin(AdminDtoRequest adminDtoRequest) {
+    public CreateAdminDtoResponse postAdmin(CreateAdminDtoRequest adminDtoRequest) {
         Admin admin = adminMapper.dtoToModel(adminDtoRequest);
         userDao.insertFromAdmin(admin);
         int userId = userDao.getIdByLogin(admin.getLogin());
         sessionDao.insert(new Session(userId));
         return adminMapper.modelToDtoResponse(adminDao.insert(admin, userId));
+    }
+
+    public UpdateAdminDtoResponse updateAdmin(HttpServletRequest httpServletRequest,
+                                              UpdateAdminDtoRequest adminDtoRequest) throws ServerException {
+        Session session = sessionService.getJavaSessionId(httpServletRequest);
+        Admin admin = adminDao.getByJavaSessionId(session.getJavaSessionId());
+        validateService.checkPasswordByLogin(adminDtoRequest.getOldPassword(), admin.getLogin());
+        adminDao.update(adminMapper.UpdateDtoRequestToModel(admin, adminDtoRequest), userDao.getIdByLogin(admin.getLogin()));
+        return adminMapper.modelToUpdateDtoResponse(adminDao.getByJavaSessionId(session.getJavaSessionId()));
     }
 }

@@ -39,7 +39,7 @@ public class GlobalErrorHandler {
 
         error.getAllErrors().add(String.format("ErrorCode\":\"%s", exc.getErrorCode()));
         error.getAllErrors().add(String.format("Field\":\"%s", exc.getField()));
-        error.getAllErrors().add(String.format("Message\":\"%s", exc.getMessage()));
+        error.getAllErrors().add(String.format("Message\":\"%s", exc.getErrorCode().getMessage()));
         log.info("MyException {errors} - " + error);
         return error;
     }

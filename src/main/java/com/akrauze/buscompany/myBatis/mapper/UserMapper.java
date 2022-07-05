@@ -49,10 +49,12 @@ public interface UserMapper {
     Integer insertFromClient(@Param("client") Client client);
 
 
-//    @Update("UPDATE ...")
-//    User update();
-//
-//
+    @Update("UPDATE users SET firstName = #{admin.firstName}, lastName = #{admin.lastName}, patronymic = #{admin.patronymic} " +
+            "password = #{admin.password} " +
+            "WHERE id = #{admin.userId}")
+    void updateFromAdmin(@Param("admin") Admin admin);
+
+
 //    @Delete("DELETE ...")
 //    User delete();
 

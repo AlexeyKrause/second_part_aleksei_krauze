@@ -8,7 +8,7 @@ import javax.validation.constraints.NotNull;
 
 @Data
 @ToString
-public class AdminDtoRequest extends UserDtoRequest {
+public class CreateAdminDtoRequest extends CreateUserDtoRequest {
     @NotNull
     String position;
 }

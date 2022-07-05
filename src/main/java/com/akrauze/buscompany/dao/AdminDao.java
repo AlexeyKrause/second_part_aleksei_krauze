@@ -12,7 +12,7 @@ public interface AdminDao {
 
     Admin getByJavaSessionId(String javaSessionId);
 
-    Admin update(Admin admin);
+    void update(Admin admin, int userId);
 
     void delete(int id);
 

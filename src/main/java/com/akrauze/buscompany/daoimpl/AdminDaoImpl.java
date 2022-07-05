@@ -2,7 +2,6 @@ package com.akrauze.buscompany.daoimpl;
 
 
 import com.akrauze.buscompany.dao.AdminDao;
-import com.akrauze.buscompany.dao.Dao;
 import com.akrauze.buscompany.model.Admin;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.ibatis.session.SqlSession;
@@ -21,15 +20,15 @@ public class AdminDaoImpl extends DaoImplBase implements AdminDao {
 
     @Override
     public Admin getById(int id) {
-        log.info("Dao getAdminById - " + id);
+        log.info("AdminDao getAdminById - " + id);
         Admin admin = getAdminMapper(sqlSession).getById(id);
-        log.info("Dao getAdminById {} - ", admin);
+        log.info("AdminDao getAdminById {} - ", admin);
         return admin;
     }
 
     @Override
     public Admin getByLogin(String login) {
-        log.info("Dao getAdminByLogin {} - ", login);
+        log.info("AdminDao getAdminByLogin {} - ", login);
         return getAdminMapper(sqlSession).getByILogin(login);
     }
 
@@ -41,14 +40,15 @@ public class AdminDaoImpl extends DaoImplBase implements AdminDao {
 
     @Override
     public Admin insert(Admin admin, int userId) {
-        log.info("DAO insert Admin {} - ", admin);
+        log.info("AdminDao insert Admin {} - ", admin);
         getAdminMapper(sqlSession).insert(admin, userId);
         return admin;
     }
 
     @Override
-    public Admin update(Admin admin) {
-        return null;
+    public void update(Admin admin, int userId) {
+        log.info("AdminDao update Admin {}, where userId {} - ", admin, userId);
+        getAdminMapper(sqlSession).update(admin, userId);
     }
 
     @Override

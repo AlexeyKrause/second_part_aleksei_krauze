@@ -18,5 +18,7 @@ public interface UserDao {
 
     int getCountLogin(String login);
 
+    void updateFromAdmin(Admin admin);
+
     void delete(int id);
 }

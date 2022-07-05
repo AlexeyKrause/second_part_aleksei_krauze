@@ -5,8 +5,7 @@ import lombok.ToString;
 
 @Data
 @ToString
-public class AdminDtoResponse extends UserDtoResponse {
-    int id;
+public class UpdateAdminDtoResponse extends UpdateUserDtoResponse{
     String position;
     String userType;
 }

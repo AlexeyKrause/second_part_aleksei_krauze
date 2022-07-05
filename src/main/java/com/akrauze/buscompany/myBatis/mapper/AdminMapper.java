@@ -67,8 +67,9 @@ public interface AdminMapper {
     Admin getByJavaSessionId(String javaSessionId);
 
 
-    @Update("UPDATE ...")
-    Admin update();
+    @Update("UPDATE admins SET position = #{admin.position} " +
+            "WHERE userId = #{userId}")
+    void update(@Param("admin") Admin admin, @Param("userId") int userId);
 
 
     @Delete("DELETE ...")
