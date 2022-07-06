@@ -1,6 +1,5 @@
 package com.akrauze.buscompany.myBatis.mapper;
 
-
 import com.akrauze.buscompany.model.Admin;
 import org.apache.ibatis.annotations.*;
 
@@ -52,8 +51,10 @@ public interface AdminMapper {
     @Select("SELECT admins.id AS id, admins.position AS position, admins.userId AS userId, users.firstName AS firstName, " +
             "users.lastname AS lastName, users.patronymic AS patronymic, users.login AS login, users.password AS password, " +
             "users.userRole AS userRole " +
-            "FROM admins, users, sessions " +
-            "WHERE sessions.javaSessionId=#{javaSessionId} AND users.id = sessions.userId")
+            "FROM admins " +
+            "JOIN users ON users.id = admins.userId " +
+            "JOIN sessions ON sessions.userId = admins.userId " +
+            "WHERE sessions.javaSessionId=#{javaSessionId}")
     @Results({
             @Result(property = "id", column = "id"),
             @Result(property = "firstName", column = "firstName"),

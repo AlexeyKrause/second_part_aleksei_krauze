@@ -14,13 +14,10 @@ public interface AdminMapper {
 
     AdminMapper INSTANCE = Mappers.getMapper(AdminMapper.class);
 
-
     Admin dtoToModel(CreateAdminDtoRequest adminDtoRequest);
-
 
     @Mapping(target = "userType", constant = "admin")
     CreateAdminDtoResponse modelToDtoResponse(Admin admin);
-
 
     @Mapping(source = "adminDtoRequest.firstName", target = "firstName")
     @Mapping(source = "adminDtoRequest.lastName", target = "lastName")
@@ -29,8 +26,7 @@ public interface AdminMapper {
     @Mapping(source = "adminDtoRequest.newPassword", target = "password")
     @Mapping(source = "admin.userRole", target = "userRole")
     @Mapping(source = "adminDtoRequest.position", target = "position")
-    Admin UpdateDtoRequestToModel(Admin admin, UpdateAdminDtoRequest adminDtoRequest);
-
+    Admin updateDtoRequestToModel(Admin admin, UpdateAdminDtoRequest adminDtoRequest);
 
     @Mapping(source = "admin.firstName", target = "firstName")
     @Mapping(source = "admin.lastName", target = "lastName")

@@ -18,7 +18,9 @@ public interface UserDao {
 
     int getCountLogin(String login);
 
-    void updateFromAdmin(Admin admin);
+    void updateFromAdmin(Admin admin, int userId);
+
+    void updateFromClient(Client client, int userId);
 
     void delete(int id);
 }

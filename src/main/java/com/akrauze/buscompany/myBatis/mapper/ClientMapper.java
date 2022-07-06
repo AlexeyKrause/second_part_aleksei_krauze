@@ -15,9 +15,9 @@ public interface ClientMapper {
     Integer insert(@Param("client") Client client, @Param("userId") int userId);
 
 
-    @Select("SELECT clients.id AS id, clients.email AS email, clients.phoneNumber AS phoneNumber,clients.userId AS userId, users.firstName AS firstName, " +
-            "users.lastname AS lastName, users.patronymic AS patronymic, users.login AS login, users.password AS password, " +
-            "users.userRole AS userRole " +
+    @Select("SELECT clients.id AS id, clients.email AS email, clients.phoneNumber AS phoneNumber,clients.userId AS userId, " +
+            "users.firstName AS firstName, users.lastname AS lastName, users.patronymic AS patronymic, users.login AS login, " +
+            "users.password AS password, users.userRole AS userRole " +
             "FROM clients, users " +
             "WHERE clients.id = #{id} AND users.id = userId")
     @Results({
@@ -34,10 +34,10 @@ public interface ClientMapper {
     Client getById(int id);
 
 
-    @Select("SELECT clients.id AS id, clients.email AS email, clients.phoneNumber AS phoneNumber,clients.userId AS userId, users.firstName AS firstName, " +
-            "users.lastname AS lastName, users.patronymic AS patronymic, users.login AS login, users.password AS password, " +
-            "users.userRole AS userRole " +
-            "FROM clients INNER JOIN users ON users.id=userId AND users.login=#{login}")
+    @Select("SELECT clients.id AS id, clients.email AS email, clients.phoneNumber AS phoneNumber,clients.userId AS userId, " +
+            "users.firstName AS firstName, users.lastname AS lastName, users.patronymic AS patronymic, users.login AS login, " +
+            "users.password AS password, users.userRole AS userRole " +
+            "FROM clients JOIN users ON users.id=userId AND users.login=#{login}")
     @Results({
             @Result(property = "id", column = "id"),
             @Result(property = "firstName", column = "firstName"),
@@ -52,11 +52,13 @@ public interface ClientMapper {
     Client getByLogin(String login);
 
 
-    @Select("SELECT clients.id AS id, clients.email AS email, clients.phoneNumber AS phoneNumber,clients.userId AS userId, users.firstName AS firstName, " +
-            "users.lastname AS lastName, users.patronymic AS patronymic, users.login AS login, users.password AS password, " +
-            "users.userRole AS userRole " +
-            "FROM clients, users, sessions " +
-            "WHERE sessions.javaSessionId=#{javaSessionId} AND users.id = sessions.userId")
+    @Select("SELECT clients.id AS id, clients.email AS email, clients.phoneNumber AS phoneNumber,clients.userId AS userId, " +
+            "users.firstName AS firstName, users.lastname AS lastName, users.patronymic AS patronymic, users.login AS login, " +
+            "users.password AS password, users.userRole AS userRole " +
+            "FROM clients " +
+            "JOIN users ON users.id = clients.userId " +
+            "JOIN sessions ON sessions.userId = clients.userId " +
+            "WHERE sessions.javaSessionId=#{javaSessionId}")
     @Results({
             @Result(property = "id", column = "id"),
             @Result(property = "firstName", column = "firstName"),
@@ -89,8 +91,9 @@ public interface ClientMapper {
     List<Client> getAll();
 
 
-    @Update("UPDATE ...")
-    Client update();
+    @Update("UPDATE clients SET email = #{client.email}, phoneNumber = #{client.phoneNumber} " +
+            "WHERE userId = #{userId}")
+    void update(@Param("client") Client client, @Param("userId") int userId);
 
 
     @Delete("DELETE ...")

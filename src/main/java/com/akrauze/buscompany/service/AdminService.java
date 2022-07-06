@@ -59,7 +59,10 @@ public class AdminService {
         Session session = sessionService.getJavaSessionId(httpServletRequest);
         Admin admin = adminDao.getByJavaSessionId(session.getJavaSessionId());
         validateService.checkPasswordByLogin(adminDtoRequest.getOldPassword(), admin.getLogin());
-        adminDao.update(adminMapper.UpdateDtoRequestToModel(admin, adminDtoRequest), userDao.getIdByLogin(admin.getLogin()));
+        Admin upAdmin = adminMapper.updateDtoRequestToModel(admin, adminDtoRequest);
+        int userId = userDao.getIdByLogin(upAdmin.getLogin());
+        userDao.updateFromAdmin(upAdmin, userId);
+        adminDao.update(upAdmin, userId);
         return adminMapper.modelToUpdateDtoResponse(adminDao.getByJavaSessionId(session.getJavaSessionId()));
     }
 }

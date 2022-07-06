@@ -1,8 +1,8 @@
 package com.akrauze.buscompany.controllers;
 
-import com.akrauze.buscompany.dtorequest.ClientDtoRequest;
-import com.akrauze.buscompany.dtorequest.CredentialsSessionDtoRequest;
+import com.akrauze.buscompany.dtorequest.*;
 import com.akrauze.buscompany.dtoresponse.ClientDtoResponse;
+import com.akrauze.buscompany.dtoresponse.UpdateClientDtoResponse;
 import com.akrauze.buscompany.dtoresponse.UserDtoResponse;
 import com.akrauze.buscompany.exception.ErrorCode;
 import com.akrauze.buscompany.exception.ServerException;
@@ -49,11 +49,17 @@ public class ClientController {
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    UserDtoResponse postClient(@Valid @RequestBody ClientDtoRequest clientDtoRequest,
+    UserDtoResponse postClient(@Valid @RequestBody CreateClientDtoRequest clientDtoRequest,
                                HttpServletResponse httpServletResponse) throws ServerException {
         validateService.checkNewLogin(clientDtoRequest.getLogin());
         clientService.postClient(clientDtoRequest);
         return sessionService.login(new CredentialsSessionDtoRequest(clientDtoRequest.getLogin(),
                 clientDtoRequest.getPassword()), httpServletResponse);
+    }
+
+    @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    public UpdateClientDtoResponse updateClient(HttpServletRequest httpServletRequest, @Valid @RequestBody
+            UpdateClientDtoRequest clientDtoRequest) throws ServerException {
+        return clientService.updateClient(httpServletRequest, clientDtoRequest);
     }
 }

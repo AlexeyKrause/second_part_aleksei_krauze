@@ -48,6 +48,14 @@ CREATE TABLE sessions (
     FOREIGN KEY (userId) REFERENCES users(id) ON DELETE CASCADE
 ) ENGINE=INNODB DEFAULT CHARSET=utf8;
 
+CREATE TABLE buses (
+    id INT NOT NULL AUTO_INCREMENT,
+    busName VARCHAR(50) NOT NULL,
+    placeCount INT NOT NULL,
+    UNIQUE KEY buses (busName),
+    PRIMARY KEY (busName)
+) ENGINE=INNODB DEFAULT CHARSET=utf8;
+
 --insert into users (firstName, lastname, login, password, role) values ("Alex", "Peres", "admin", "test", "ADMIN");
 
 --insert into users (firstName, lastname, login, password, role) values ("Fill", "Kollins", "client", "test", "CLIENT");

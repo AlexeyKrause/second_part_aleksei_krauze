@@ -68,9 +68,15 @@ public class UserDaoImpl extends DaoImplBase implements UserDao {
     }
 
     @Override
-    public void updateFromAdmin(Admin admin) {
+    public void updateFromAdmin(Admin admin, int userId) {
         log.info("UserDao update user from Admin {} - ", admin);
-        getUserMapper(sqlSession).updateFromAdmin(admin);
+        getUserMapper(sqlSession).updateFromAdmin(admin, userId);
+    }
+
+    @Override
+    public void updateFromClient(Client client, int userId) {
+        log.info("UserDao update user from Client {} - ", client);
+        getUserMapper(sqlSession).updateFromClient(client, userId);
     }
 
     @Override

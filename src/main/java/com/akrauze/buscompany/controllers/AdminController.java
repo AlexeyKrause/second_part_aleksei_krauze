@@ -36,16 +36,17 @@ public class AdminController {
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public UserDtoResponse postAdmin(@Valid @RequestBody CreateAdminDtoRequest adminDtoRequest, HttpServletResponse httpServletResponse) throws ServerException {
+    public UserDtoResponse postAdmin(@Valid @RequestBody CreateAdminDtoRequest adminDtoRequest,
+                                     HttpServletResponse httpServletResponse) throws ServerException {
         validateService.checkNewLogin(adminDtoRequest.getLogin());
         adminService.postAdmin(adminDtoRequest);
-        return sessionService.login(new CredentialsSessionDtoRequest(adminDtoRequest.getLogin(), adminDtoRequest.getPassword()), httpServletResponse);
+        return sessionService.login(new CredentialsSessionDtoRequest(adminDtoRequest.getLogin(),
+                adminDtoRequest.getPassword()), httpServletResponse);
     }
 
     @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public UpdateAdminDtoResponse updateAdmin(HttpServletRequest httpServletRequest, UpdateAdminDtoRequest adminDtoRequest) {
-//        validateService.checkPasswordByLogin(adminDtoRequest.getOldPassword(),
-//                adminService.getByJavaSessionId());
-        return null;
+    public UpdateAdminDtoResponse updateAdmin(HttpServletRequest httpServletRequest, @Valid @RequestBody
+                                              UpdateAdminDtoRequest adminDtoRequest) throws ServerException {
+        return adminService.updateAdmin(httpServletRequest, adminDtoRequest);
     }
 }

@@ -28,9 +28,9 @@ public class ValidateService {
     public void checkLoginCredential(CredentialsSessionDtoRequest credentials) throws ServerException {
         Optional.ofNullable(userDao.getIdByLogin(credentials.getLogin())).orElseThrow(
                 () -> new ServerException(ErrorCode.LOGIN_NOT_FOUND, "login"));
-        String password = Optional.ofNullable(userDao.getPassByLogin(credentials.getLogin())).orElseThrow(
+        Optional.ofNullable(userDao.getPassByLogin(credentials.getLogin())).orElseThrow(
                 () -> new ServerException(ErrorCode.EMPTY_PASSWORD, "password"));
-        checkPasswordByLogin(password, credentials.getLogin());
+        checkPasswordByLogin(credentials.getPassword(), credentials.getLogin());
     }
 
     public void checkNewLogin(String login) throws ServerException {

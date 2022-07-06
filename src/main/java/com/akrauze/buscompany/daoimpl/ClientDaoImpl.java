@@ -53,8 +53,9 @@ public class ClientDaoImpl extends DaoImplBase implements ClientDao {
     }
 
     @Override
-    public Client update(Client client) {
-        return null;
+    public void update(Client client, int userId) {
+        log.info("ClientDao update Client {}", client);
+        getClientMapper(sqlSession).update(client, userId);
     }
 
     @Override
