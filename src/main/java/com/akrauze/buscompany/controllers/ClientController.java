@@ -40,7 +40,8 @@ public class ClientController {
         if (userService.getUserRoleByJavaSessionId(sessionService.getJavaSessionId(httpServletRequest)
                 .getJavaSessionId()).equals("ADMIN"))
             return clientService.getAllClient();
-        else throw new ServerException(ErrorCode.YOU_DONT_HAVE_PERMISSIONS, "userRole");
+        else
+            throw new ServerException(ErrorCode.YOU_DONT_HAVE_PERMISSIONS, "userRole");
     }
 
     @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)

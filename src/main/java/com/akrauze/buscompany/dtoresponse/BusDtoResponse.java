@@ -1,12 +1,11 @@
-package com.akrauze.buscompany.model;
+package com.akrauze.buscompany.dtoresponse;
 
 import lombok.Data;
 import lombok.ToString;
 
 @Data
 @ToString
-public class Bus {
-    int id;
+public class BusDtoResponse {
     String busName;
     int placeCount;
 }
