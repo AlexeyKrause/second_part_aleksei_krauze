@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @Slf4j
@@ -22,7 +23,8 @@ public class GlobalErrorHandler {
     public MyError handleValidationMethodArgumentNotValidException(MethodArgumentNotValidException exc) {
         final MyError error = new MyError();
         exc.getBindingResult().getFieldErrors().forEach(fieldError-> {
-            error.getAllErrors().add(String.format("Field %s:%s", fieldError.getField(), fieldError.getDefaultMessage()));
+            error.getAllErrors().add(String.format("\"ErrorCode\":\"%s\" \n\"Field\":\"%s\" \n\"Message\":\"%s\"",
+                    fieldError.getCode(), fieldError.getField(), fieldError.getDefaultMessage()));
         });
         exc.getBindingResult().getGlobalErrors().forEach(err-> {
             error.getAllErrors().add(String.format("global:%s", err.getDefaultMessage()));

@@ -35,6 +35,6 @@ public class BusController {
         if (userService.getUserRoleByJavaSessionId(session.getJavaSessionId()).equals("ADMIN"))
             return busService.getAll();
         else
-            throw new ServerException(ErrorCode.YOU_DONT_HAVE_PERMISSIONS, "userRole");
+            throw new ServerException(ErrorCode.YOU_DONT_HAVE_PERMISSION, "userRole");
     }
 }

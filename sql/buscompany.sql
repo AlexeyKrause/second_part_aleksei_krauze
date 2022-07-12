@@ -53,7 +53,7 @@ CREATE TABLE buses (
     busName VARCHAR(50) NOT NULL,
     placeCount INT NOT NULL,
     UNIQUE KEY buses (busName),
-    PRIMARY KEY (busName)
+    PRIMARY KEY (id)
 ) ENGINE=INNODB DEFAULT CHARSET=utf8;
 
 --insert into users (firstName, lastname, login, password, role) values ("Alex", "Peres", "admin", "test", "ADMIN");
