@@ -1,14 +1,14 @@
 package com.akrauze.buscompany.model;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.ToString;
 
-import java.util.Date;
-
 @Data
 @ToString
+@AllArgsConstructor
 public class Schedule {
-    Date fromDate;
-    Date toDate;
+    String fromDate;
+    String toDate;
     String period;
 }

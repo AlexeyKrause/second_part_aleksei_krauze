@@ -36,7 +36,7 @@ public class ClientController {
     }
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    List<ClientDtoResponse> getAllClient(HttpServletRequest httpServletRequest) throws ServerException {
+    public List<ClientDtoResponse> getAllClient(HttpServletRequest httpServletRequest) throws ServerException {
         if (userService.getUserRoleByJavaSessionId(sessionService.getJavaSessionId(httpServletRequest)
                 .getJavaSessionId()).equals("ADMIN"))
             return clientService.getAllClient();
@@ -45,12 +45,12 @@ public class ClientController {
     }
 
     @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    ClientDtoResponse getById(@PathVariable("id") int id) {
+    public ClientDtoResponse getById(@PathVariable("id") int id) {
         return clientService.getClientById(id);
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    UserDtoResponse postClient(@Valid @RequestBody CreateClientDtoRequest clientDtoRequest,
+    public UserDtoResponse postClient(@Valid @RequestBody CreateClientDtoRequest clientDtoRequest,
                                HttpServletResponse httpServletResponse) throws ServerException {
         validateService.checkNewLogin(clientDtoRequest.getLogin());
         clientService.postClient(clientDtoRequest);
