@@ -56,7 +56,7 @@ public class AdminService {
 
     public UpdateAdminDtoResponse updateAdmin(HttpServletRequest httpServletRequest,
                                               UpdateAdminDtoRequest adminDtoRequest) throws ServerException {
-        Session session = sessionService.getJavaSessionId(httpServletRequest);
+        Session session = sessionService.getJavaSession(httpServletRequest);
         Admin admin = adminDao.getByJavaSessionId(session.getJavaSessionId());
         validateService.checkPasswordByLogin(adminDtoRequest.getOldPassword(), admin.getLogin());
         Admin upAdmin = adminMapper.updateDtoRequestToModel(admin, adminDtoRequest);

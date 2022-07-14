@@ -2,6 +2,7 @@ package com.akrauze.buscompany.controllers;
 
 import com.akrauze.buscompany.dtorequest.AddTripDtoRequest;
 import com.akrauze.buscompany.dtoresponse.TripDtoResponse;
+import com.akrauze.buscompany.exception.ServerException;
 import com.akrauze.buscompany.service.TripService;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
@@ -18,10 +19,9 @@ public class TripController {
         this.tripService = tripService;
     }
 
-
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public TripDtoResponse postTrip(@Valid @RequestBody AddTripDtoRequest dtoRequest, HttpServletRequest httpServletRequest) {
-//        tripService.
-        return null;
+    public TripDtoResponse postTrip(@Valid @RequestBody AddTripDtoRequest dtoRequest,
+                                    HttpServletRequest httpServletRequest) throws ServerException {
+        return tripService.postTrip(dtoRequest, httpServletRequest);
     }
 }

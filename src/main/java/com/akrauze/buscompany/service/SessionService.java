@@ -55,7 +55,7 @@ public class SessionService {
     }
 
     public String logout(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) {
-        Session session = getJavaSessionId(httpServletRequest);
+        Session session = getJavaSession(httpServletRequest);
         session.setJavaSessionId(null);
         sessionDao.updateSession(session);
         httpServletResponse.addCookie(new Cookie("JAVASESSIONID", ""));
@@ -63,7 +63,7 @@ public class SessionService {
     }
 
     public String deleteAccount(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) {
-        Session session = getJavaSessionId(httpServletRequest);
+        Session session = getJavaSession(httpServletRequest);
         session.setActive(false);
         session.setJavaSessionId(null);
         sessionDao.updateSession(session);
@@ -71,7 +71,7 @@ public class SessionService {
         return "";
     }
 
-    public Session getJavaSessionId(HttpServletRequest httpServletRequest) {
+    public Session getJavaSession(HttpServletRequest httpServletRequest) {
         List<Cookie> cookies = Arrays.stream(httpServletRequest.getCookies()).filter(p
                 -> p.getName().equals("JAVASESSIONID") ).collect(Collectors.toList());
         return sessionDao.getByJavaSessionId(cookies.get(0).getValue());

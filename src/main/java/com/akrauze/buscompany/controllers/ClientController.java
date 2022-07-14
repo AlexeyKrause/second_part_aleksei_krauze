@@ -8,7 +8,6 @@ import com.akrauze.buscompany.exception.ErrorCode;
 import com.akrauze.buscompany.exception.ServerException;
 import com.akrauze.buscompany.service.ClientService;
 import com.akrauze.buscompany.service.SessionService;
-import com.akrauze.buscompany.service.UserService;
 import com.akrauze.buscompany.service.ValidateService;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
@@ -25,23 +24,17 @@ public class ClientController {
     public final ClientService clientService;
     public final SessionService sessionService;
     public final ValidateService validateService;
-    private final UserService userService;
 
     public ClientController(ClientService clientService, SessionService sessionService,
-                            ValidateService validateService, UserService userService) {
+                            ValidateService validateService) {
         this.clientService = clientService;
         this.sessionService = sessionService;
         this.validateService = validateService;
-        this.userService = userService;
     }
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public List<ClientDtoResponse> getAllClient(HttpServletRequest httpServletRequest) throws ServerException {
-        if (userService.getUserRoleByJavaSessionId(sessionService.getJavaSessionId(httpServletRequest)
-                .getJavaSessionId()).equals("ADMIN"))
-            return clientService.getAllClient();
-        else
-            throw new ServerException(ErrorCode.YOU_DONT_HAVE_PERMISSION, "userRole");
+        return clientService.getAllClient(httpServletRequest);
     }
 
     @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)

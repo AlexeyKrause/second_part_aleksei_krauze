@@ -20,4 +20,6 @@ public class DaoImplBase {
 
     protected BusMapper getBusMapper(SqlSession sqlSession) {return  sqlSession.getMapper(BusMapper.class);}
 
+
+
 }

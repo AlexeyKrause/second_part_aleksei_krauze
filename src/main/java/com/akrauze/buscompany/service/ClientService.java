@@ -7,6 +7,7 @@ import com.akrauze.buscompany.dtorequest.CreateClientDtoRequest;
 import com.akrauze.buscompany.dtorequest.UpdateClientDtoRequest;
 import com.akrauze.buscompany.dtoresponse.ClientDtoResponse;
 import com.akrauze.buscompany.dtoresponse.UpdateClientDtoResponse;
+import com.akrauze.buscompany.exception.ErrorCode;
 import com.akrauze.buscompany.exception.ServerException;
 import com.akrauze.buscompany.mappers.ClientMapper;
 import com.akrauze.buscompany.model.Client;
@@ -40,9 +41,9 @@ public class ClientService {
         this.validateService = validateService;
     }
 
-    public List<ClientDtoResponse> getAllClient() {
-        return clientDao.getAll().stream()
-                .map(clientMapper::modelToDtoResponse).collect(Collectors.toList());
+    public List<ClientDtoResponse> getAllClient(HttpServletRequest httpServletRequest) throws ServerException {
+        validateService.checkUserRole(httpServletRequest, "ADMIN");
+        return clientDao.getAll().stream().map(clientMapper::modelToDtoResponse).collect(Collectors.toList());
     }
 
     public ClientDtoResponse getClientById(int id) {
@@ -63,7 +64,7 @@ public class ClientService {
 
     public UpdateClientDtoResponse updateClient(HttpServletRequest httpServletRequest,
                                                 UpdateClientDtoRequest clientDtoRequest) throws ServerException {
-        Session session = sessionService.getJavaSessionId(httpServletRequest);
+        Session session = sessionService.getJavaSession(httpServletRequest);
         Client client = clientDao.getByJavaSessionId(session.getJavaSessionId());
         validateService.checkPasswordByLogin(clientDtoRequest.getOldPassword(), client.getLogin());
         Client upClient = clientMapper.updateDtoRequestToModel(client, clientDtoRequest);
