@@ -1,10 +1,7 @@
 package com.akrauze.buscompany.myBatis.mapper;
 
 import com.akrauze.buscompany.model.Bus;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Result;
-import org.apache.ibatis.annotations.Results;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.*;
 
 import java.util.List;
 
@@ -17,4 +14,7 @@ public interface BusMapper {
             @Result(property = "placeCount", column = "placeCount")
     })
     List<Bus> getAll();
+
+    @Select("SELECT * FROM buses WHERE buses.busName=#{busName}")
+    Bus getByName(@Param("busName") String busName);
 }

@@ -80,6 +80,13 @@ CREATE TABLE trips (
     FOREIGN KEY (busId) REFERENCES buses(id) ON DELETE CASCADE
 ) ENGINE=INNODB DEFAULT CHARSET=utf8;
 
+CREATE TABLE periodsTrip (
+    id INT NOT NULL AUTO_INCREMENT,
+    period VARCHAR(255) NOT NULL,
+    tripId INT NOT NULL,
+    FOREIGN KEY (tripId) REFERENCES trips(id) ON DELETE CASCADE
+) ENGINE=INNODB DEFAULT CHARSET=utf8;
+
 --insert into users (firstName, lastname, login, password, role) values ("Alex", "Peres", "admin", "test", "ADMIN");
 
 --insert into users (firstName, lastname, login, password, role) values ("Fill", "Kollins", "client", "test", "CLIENT");

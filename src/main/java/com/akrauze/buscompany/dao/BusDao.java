@@ -7,4 +7,6 @@ import java.util.List;
 public interface BusDao{
 
     List<Bus> getAll();
+
+    Bus getByName(String busName);
 }

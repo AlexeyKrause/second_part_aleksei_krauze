@@ -24,4 +24,10 @@ public class BusDaoImpl extends DaoImplBase implements BusDao {
         log.info("BusDao getAll Bus");
         return getBusMapper(sqlSession).getAll();
     }
+
+    @Override
+    public Bus getByName(String busName) {
+        log.info("BusDao get Bus by busName {}", busName);
+        return getBusMapper(sqlSession).getByName(busName);
+    }
 }

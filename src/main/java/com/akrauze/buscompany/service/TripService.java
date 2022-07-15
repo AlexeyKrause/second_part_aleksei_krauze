@@ -1,5 +1,6 @@
 package com.akrauze.buscompany.service;
 
+import com.akrauze.buscompany.daoimpl.BusDaoImpl;
 import com.akrauze.buscompany.daoimpl.DateTripDaoImpl;
 import com.akrauze.buscompany.daoimpl.TripDaoImpl;
 import com.akrauze.buscompany.dtorequest.AddTripDtoRequest;
@@ -17,12 +18,14 @@ import javax.servlet.http.HttpServletRequest;
 public class TripService {
     private final DateTripDaoImpl dateTripDao;
     private final TripDaoImpl tripDao;
+    private final BusDaoImpl busDao;
     private final TripMapper tripMapper;
     private final ValidateService validateService;
 
-    public TripService(DateTripDaoImpl dateTripDao, TripDaoImpl tripDao, TripMapper tripMapper, ValidateService validateService) {
+    public TripService(DateTripDaoImpl dateTripDao, TripDaoImpl tripDao, BusDaoImpl busDao, TripMapper tripMapper, ValidateService validateService) {
         this.dateTripDao = dateTripDao;
         this.tripDao = tripDao;
+        this.busDao = busDao;
         this.tripMapper = tripMapper;
         this.validateService = validateService;
     }
@@ -32,7 +35,8 @@ public class TripService {
         validateService.checkUserRole(httpServletRequest, "ADMIN");
         if (dtoRequest.getClass().getName().equals("AddTripScheduleDtoRequest")) {
             TripSchedule tripSchedule = tripMapper.dtoScheduleToModel(dtoRequest);
-            tripDao.insertTripSchedule(tripSchedule, 2);
+            tripDao.insertTripSchedule(tripSchedule, busDao.getByName(dtoRequest.getBusName()).getId());
+
             return new TripScheduleDtoResponse();
         } else {
 
