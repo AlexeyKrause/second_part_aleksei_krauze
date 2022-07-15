@@ -14,12 +14,14 @@ public class DaoImplBase {
         return sqlSession.getMapper(AdminMapper.class);
     }
 
-    protected ClientMapper getClientMapper(SqlSession sqlSession) {return sqlSession.getMapper(ClientMapper.class);}
+    protected ClientMapper getClientMapper(SqlSession sqlSession) {return sqlSession.getMapper(ClientMapper.class); }
 
-    protected SessionMapper getSessionMapper(SqlSession sqlSession) {return  sqlSession.getMapper(SessionMapper.class);}
+    protected SessionMapper getSessionMapper(SqlSession sqlSession) {return  sqlSession.getMapper(SessionMapper.class); }
 
-    protected BusMapper getBusMapper(SqlSession sqlSession) {return  sqlSession.getMapper(BusMapper.class);}
+    protected BusMapper getBusMapper(SqlSession sqlSession) {return  sqlSession.getMapper(BusMapper.class); }
 
+    protected TripMapper getTripMapper(SqlSession sqlSession) {return sqlSession.getMapper(TripMapper.class); }
 
+    protected DatesTripMapper getDateTripMapper(SqlSession sqlSession) {return sqlSession.getMapper(DatesTripMapper.class);}
 
 }
