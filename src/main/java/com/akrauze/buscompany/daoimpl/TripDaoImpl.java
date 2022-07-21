@@ -1,8 +1,7 @@
 package com.akrauze.buscompany.daoimpl;
 
 import com.akrauze.buscompany.dao.TripDao;
-import com.akrauze.buscompany.model.TripDates;
-import com.akrauze.buscompany.model.TripSchedule;
+import com.akrauze.buscompany.model.Trip;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,13 +14,13 @@ public class TripDaoImpl extends DaoImplBase implements TripDao {
     private SqlSession sqlSession;
 
     @Override
-    public Integer insertTripSchedule(TripSchedule trip, int busId) {
+    public Integer insertTripSchedule(Trip trip, int busId) {
         log.info("TripDao insert TripSchedule {}", trip);
         return getTripMapper(sqlSession).insertTripSchedule(trip, busId);
     }
 
     @Override
-    public Integer insertTripDates(TripDates trip, int busId) {
+    public Integer insertTripDates(Trip trip, int busId) {
         log.info("TripDao insert TripDates {}", trip);
         return getTripMapper(sqlSession).insertTripDates(trip, busId);
     }

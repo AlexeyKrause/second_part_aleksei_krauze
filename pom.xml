@@ -23,8 +23,8 @@
 				<configuration>
 					<release>11</release>
 
-					<source>1.8</source>
-					<target>1.8</target>
+					<source>14</source>
+					<target>14</target>
 					<annotationProcessorPaths>
 						<path>
 							<groupId>org.mapstruct</groupId>

@@ -1,11 +1,11 @@
 package com.akrauze.buscompany.dao;
 
 
-import com.akrauze.buscompany.model.TripDates;
-import com.akrauze.buscompany.model.TripSchedule;
+import com.akrauze.buscompany.model.Trip;
+
 
 public interface TripDao {
-    Integer insertTripSchedule(TripSchedule trip, int busId);
+    Integer insertTripSchedule(Trip trip, int busId);
 
-    Integer insertTripDates(TripDates trip, int busId);
+    Integer insertTripDates(Trip trip, int busId);
 }

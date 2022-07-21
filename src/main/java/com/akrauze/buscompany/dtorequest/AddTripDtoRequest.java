@@ -4,11 +4,12 @@ import lombok.Data;
 import lombok.ToString;
 
 import javax.validation.constraints.NotNull;
-
+import java.time.LocalDate;
+import java.util.List;
 
 @Data
 @ToString
-public abstract class AddTripDtoRequest {
+public class AddTripDtoRequest {
     @NotNull
     String busName;
     @NotNull
@@ -21,5 +22,6 @@ public abstract class AddTripDtoRequest {
     String duration;
     @NotNull
     Double price;
+    ScheduleDtoRequest schedule;
+    List<LocalDate> dates;
 }
-

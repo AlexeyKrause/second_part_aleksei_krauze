@@ -13,7 +13,7 @@ public interface DatesTripMapper {
                 "( #{item.date}, #{tripId} )",
                 "</foreach>",
                 "</script>"})
-    Integer insertDates(@Param("list")List<Date> dates, @Param("tripId") int tripId);
+    Integer insertDates(@Param("list")List<String> dates, @Param("tripId") int tripId);
 
 
     @Select("SELECT FROM datesTrip WHERE tripId = #{tripId}")
@@ -23,6 +23,5 @@ public interface DatesTripMapper {
     @Delete("DELETE FROM datesTrip WHERE tripId = #{tripId}")
     Integer deleteByTripId(@Param("tripId") int tripId);
 
+
 }
-//@Delete("DELETE FROM trainee WHERE id = #{trainee.id}")
-//    int delete(@Param("trainee") Trainee trainee);

@@ -1,11 +1,11 @@
 package com.akrauze.buscompany.dtorequest;
 
+import com.akrauze.buscompany.validate.PeriodValid;
 import lombok.Data;
 import lombok.ToString;
 
 import javax.validation.constraints.NotNull;
-import java.util.Arrays;
-import java.util.List;
+
 
 @Data
 @ToString
@@ -14,13 +14,7 @@ public class ScheduleDtoRequest {
     String fromDate;
     @NotNull
     String toDate;
+    @PeriodValid
     @NotNull
-    List<String> period;
-
-    public void setPeriod(String period) {
-        String[] str = period.split(",");
-        if (str.length==1)
-            str[0].toLowerCase();
-        this.period = Arrays.asList(str);
-    }
+    String period;
 }

@@ -3,8 +3,7 @@ package com.akrauze.buscompany.mappers;
 import com.akrauze.buscompany.dtorequest.AddTripDtoRequest;
 import com.akrauze.buscompany.dtoresponse.TripDatesDtoResponse;
 import com.akrauze.buscompany.dtoresponse.TripScheduleDtoResponse;
-import com.akrauze.buscompany.model.TripDates;
-import com.akrauze.buscompany.model.TripSchedule;
+import com.akrauze.buscompany.model.Trip;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 
@@ -12,11 +11,9 @@ import org.mapstruct.factory.Mappers;
 public interface TripMapper {
     TripMapper INSTANCE = Mappers.getMapper(TripMapper.class);
 
-    TripSchedule dtoScheduleToModel(AddTripDtoRequest tripDtoRequest);
+    Trip dtoScheduleToModel(AddTripDtoRequest tripDtoRequest);
 
-    TripDates dtoDatesToModel(AddTripDtoRequest tripDtoRequest);
+    TripScheduleDtoResponse modelToScheduleDtoResponse(Trip trip);
 
-    TripScheduleDtoResponse modelToScheduleDtoResponse(TripSchedule tripSchedule);
-
-    TripDatesDtoResponse modelToDatesDtoResponse(TripDates tripDates);
+    TripDatesDtoResponse modelToDatesDtoResponse(Trip trip);
 }

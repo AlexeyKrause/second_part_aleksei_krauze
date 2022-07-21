@@ -5,7 +5,7 @@ import java.util.Date;
 import java.util.List;
 
 public interface DateTripDao {
-    Integer insertDates(List<Date> dates, int tripId);
+    Integer insertDates(List<String> dates, int tripId);
 
     List<Date> getDatesByTripId(int tripId);
 
