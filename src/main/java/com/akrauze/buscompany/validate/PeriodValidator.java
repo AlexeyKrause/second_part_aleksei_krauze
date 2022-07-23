@@ -41,15 +41,8 @@ public class PeriodValidator implements ConstraintValidator<PeriodValid, String>
             else if (periodsRes.size()!=0 && periodsRes.size()!=periods.size())
                 return false;
         }
-        if (periodsRes.size()==0) {
-            for (String d : periods) {
-                try {
-                    Integer.parseInt(d);
-                    result = true;
-                }catch (NumberFormatException exc) {
-                    result = false;
-                }
-            }
+        if (periodsRes.size()==0 && s.matches(regexp)) {
+            result = true;
         }
         return result;
     }
