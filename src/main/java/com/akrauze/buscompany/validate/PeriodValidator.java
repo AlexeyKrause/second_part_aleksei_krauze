@@ -10,6 +10,7 @@ public class PeriodValidator implements ConstraintValidator<PeriodValid, String>
 
     @Override
     public boolean isValid(String s, ConstraintValidatorContext constraintValidatorContext) {
+        String regexp = "(\\d{1,2})(\\,)?";
         if (s == null || s.equals(""))
             return false;
         boolean result = false;
