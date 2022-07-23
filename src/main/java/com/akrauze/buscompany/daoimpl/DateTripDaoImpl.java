@@ -16,9 +16,9 @@ public class DateTripDaoImpl extends DaoImplBase implements DateTripDao {
     SqlSession sqlSession;
 
     @Override
-    public Integer insertDates(List<String> dates, int tripId) {
+    public Integer insert(List<String> dates, int tripId) {
         log.info("DateTripDao insert List<String> by tripId {}", tripId);
-        return getDateTripMapper(sqlSession).insertDates(dates, tripId);
+        return getDateTripMapper(sqlSession).insert(dates, tripId);
     }
 
     @Override

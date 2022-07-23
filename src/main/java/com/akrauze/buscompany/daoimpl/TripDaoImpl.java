@@ -14,14 +14,9 @@ public class TripDaoImpl extends DaoImplBase implements TripDao {
     private SqlSession sqlSession;
 
     @Override
-    public Integer insertTripSchedule(Trip trip, int busId) {
+    public Integer insert(Trip trip) {
         log.info("TripDao insert TripSchedule {}", trip);
-        return getTripMapper(sqlSession).insertTripSchedule(trip, busId);
+        return getTripMapper(sqlSession).insert(trip);
     }
 
-    @Override
-    public Integer insertTripDates(Trip trip, int busId) {
-        log.info("TripDao insert TripDates {}", trip);
-        return getTripMapper(sqlSession).insertTripDates(trip, busId);
-    }
 }

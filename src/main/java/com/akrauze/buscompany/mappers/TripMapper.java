@@ -11,7 +11,8 @@ import org.mapstruct.factory.Mappers;
 public interface TripMapper {
     TripMapper INSTANCE = Mappers.getMapper(TripMapper.class);
 
-    Trip dtoScheduleToModel(AddTripDtoRequest tripDtoRequest);
+
+    Trip mapToTrip(AddTripDtoRequest tripDtoRequest);
 
     TripScheduleDtoResponse modelToScheduleDtoResponse(Trip trip);
 

@@ -13,7 +13,7 @@ public interface DatesTripMapper {
                 "( #{item.date}, #{tripId} )",
                 "</foreach>",
                 "</script>"})
-    Integer insertDates(@Param("list")List<String> dates, @Param("tripId") int tripId);
+    Integer insert(@Param("list")List<String> dates, @Param("tripId") int tripId);
 
 
     @Select("SELECT FROM datesTrip WHERE tripId = #{tripId}")
