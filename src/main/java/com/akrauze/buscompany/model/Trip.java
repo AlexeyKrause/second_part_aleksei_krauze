@@ -11,7 +11,7 @@ import java.util.List;
 @ToString
 public class Trip {
     int id;
-    String busName;
+    int busId;
     String fromStation;
     String toStation;
     String start;
